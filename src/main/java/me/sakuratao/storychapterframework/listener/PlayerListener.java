@@ -1,4 +1,12 @@
 package me.sakuratao.storychapterframework.listener;
 
-public class PlayerListener {
+import org.bukkit.event.Listener;
+
+public class PlayerListener implements Listener {
+
+
+
+    public PlayerListener() {
+    }
+
 }

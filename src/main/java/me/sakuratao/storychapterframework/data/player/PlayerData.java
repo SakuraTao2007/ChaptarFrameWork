@@ -1,4 +1,8 @@
 package me.sakuratao.storychapterframework.data.player;
 
-public class PlayerData {
+import lombok.Data;
+
+@Data
+public class PlayerData{
+
 }
