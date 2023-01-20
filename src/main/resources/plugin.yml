@@ -1,0 +1,9 @@
+name: StoryChapterFrameWork
+version: '${project.version}'
+main: me.sakuratao.leaspace_storychapter.Leaspace_StoryChapter
+api-version: 1.19
+prefix: SCFW
+load: STARTUP
+loadbefore: [ ProtocolLib ]
+authors: [ SakuraTao ]
+description: StoryChapterFrameWork - SCFW
