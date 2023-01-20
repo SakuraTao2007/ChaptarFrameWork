@@ -1,5 +1,7 @@
 package me.sakuratao.storychapterframework;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import me.sakuratao.storychapterframework.api.SCFWAPI;
 import me.sakuratao.storychapterframework.api.SCFWAPIProvider;
 import me.sakuratao.storychapterframework.data.DataAccessor;
@@ -14,6 +16,7 @@ import java.util.function.Consumer;
 
 public final class StoryChapterFrameWork extends JavaPlugin {
 
+    public static final ProtocolManager api = ProtocolLibrary.getProtocolManager();
     public static StoryChapterFrameWork staticInstance;
     public StoryChapterFrameWork instance;
 

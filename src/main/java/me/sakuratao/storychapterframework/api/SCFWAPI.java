@@ -31,4 +31,8 @@ public interface SCFWAPI {
         }
     };
 
+    default DataAccessor getAccessor() {
+        return dataAccessor;
+    }
+
 }
