@@ -7,4 +7,6 @@ import lombok.Data;
 @Data
 @DatabaseTable
 public class StoryData {
+    @DatabaseField(id = true)
+    int id;
 }
