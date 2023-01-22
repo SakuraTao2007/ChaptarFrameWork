@@ -1,14 +1,20 @@
 package me.sakuratao.storychapterframework.handler.sub;
 
 import me.sakuratao.storychapterframework.StoryChapterFrameWork;
+import top.jingwenmc.spigotpie.common.instance.PieComponent;
+import top.jingwenmc.spigotpie.common.instance.Wire;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+@PieComponent
 public class StoryChapterHandler {
 
-    private final String path = StoryChapterFrameWork.staticInstance.getDataFolder().getPath() + "chapter";
+    @Wire
+    StoryChapterFrameWork storyChapterFrameWork;
+
+    private final String path = storyChapterFrameWork.getDataFolder().getPath() + "chapter";
 
     public void init(){
 

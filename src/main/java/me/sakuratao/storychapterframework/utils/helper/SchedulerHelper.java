@@ -3,9 +3,12 @@ package me.sakuratao.storychapterframework.utils.helper;
 import me.sakuratao.storychapterframework.StoryChapterFrameWork;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitTask;
+import top.jingwenmc.spigotpie.common.instance.PieComponent;
+import top.jingwenmc.spigotpie.common.instance.Wire;
 
+@PieComponent
 public interface SchedulerHelper {
-
+    
     /**
      *
      * 定时执行 task
