@@ -1,4 +1,4 @@
-package me.sakuratao.storychapterframework.handler.sub;
+package me.sakuratao.storychapterframework.handler;
 
 import me.sakuratao.storychapterframework.StoryChapterFrameWork;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
