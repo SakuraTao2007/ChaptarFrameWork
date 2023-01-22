@@ -19,7 +19,6 @@ public final class StoryChapterFrameWork extends JavaPlugin {
     public static final ProtocolManager api = ProtocolLibrary.getProtocolManager();
     public static StoryChapterFrameWork staticInstance;
     public StoryChapterFrameWork instance;
-
     public HandlerManager handlerManager = new HandlerManager();
 
     @Override
