@@ -5,5 +5,5 @@ api-version: 1.19
 prefix: SCFW
 load: STARTUP
 loadbefore: [ ProtocolLib ]
-authors: [ SakuraTao ]
+authors: [ SakuraTao, jingwenMC ]
 description: StoryChapterFrameWork - SCFW

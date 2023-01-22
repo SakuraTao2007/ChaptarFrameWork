@@ -2,6 +2,7 @@ package me.sakuratao.storychapterframework;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import lombok.Getter;
 import me.sakuratao.storychapterframework.api.SCFWAPI;
 import me.sakuratao.storychapterframework.api.SCFWAPIProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,9 +12,11 @@ import top.jingwenmc.spigotpie.common.instance.Wire;
 @PieComponent
 public final class StoryChapterFrameWork extends JavaPlugin {
 
+    @Getter
     public static StoryChapterFrameWork staticInstance;
 
-    public static final ProtocolManager api = ProtocolLibrary.getProtocolManager();
+    @Getter
+    public ProtocolManager plibapi = ProtocolLibrary.getProtocolManager();
 
     @Override
     public void onLoad() {
@@ -23,8 +26,7 @@ public final class StoryChapterFrameWork extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        SCFWAPIProvider.setSCFWAPI(new SCFWAPI() {
-        });
+        SCFWAPIProvider.setSCFWAPI(new SCFWAPI() {});
 
     }
 

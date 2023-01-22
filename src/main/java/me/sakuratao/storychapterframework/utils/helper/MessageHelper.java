@@ -40,7 +40,7 @@ public interface MessageHelper {
         pc.getChatComponents().write(0, WrappedChatComponent.fromText(string));
 
         try {
-            StoryChapterFrameWork.api.sendServerPacket(player, pc);
+            StoryChapterFrameWork.staticInstance.plibapi.sendServerPacket(player, pc);
         } catch (InvocationTargetException var4) {
             var4.printStackTrace();
         }
@@ -59,7 +59,7 @@ public interface MessageHelper {
         pc.getChatComponents().write(0, WrappedChatComponent.fromText(string));
 
         try {
-            StoryChapterFrameWork.api.sendServerPacket(player, pc);
+            StoryChapterFrameWork.staticInstance.plibapi.sendServerPacket(player, pc);
         } catch (InvocationTargetException var4) {
             var4.printStackTrace();
         }

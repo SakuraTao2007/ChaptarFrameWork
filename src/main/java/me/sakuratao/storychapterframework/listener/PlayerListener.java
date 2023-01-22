@@ -1,10 +1,13 @@
 package me.sakuratao.storychapterframework.listener;
 
 import org.bukkit.event.Listener;
+import top.jingwenmc.spigotpie.common.event.SpigotEventListener;
+import top.jingwenmc.spigotpie.common.instance.PieComponent;
 
-public class PlayerListener implements Listener {
-
-
+@PieComponent
+@SpigotEventListener
+public class
+PlayerListener implements Listener {
 
     public PlayerListener() {
     }
