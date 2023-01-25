@@ -1,7 +1,7 @@
 package me.sakuratao.storychapterframework.api;
 
 import me.sakuratao.storychapterframework.data.DataAccessor;
-import me.sakuratao.storychapterframework.data.Story.StoryData;
+import me.sakuratao.storychapterframework.data.Chapter.ChapterData;
 import me.sakuratao.storychapterframework.data.player.PlayerData;
 
 import java.util.UUID;
@@ -21,12 +21,12 @@ public interface SCFWAPI {
         }
 
         @Override
-        public void readStoryDataByIDAsync(int id, Consumer<StoryData> callback) {
+        public void readStoryDataByIDAsync(int id, Consumer<ChapterData> callback) {
             // TODO: 2023/1/20
         }
 
         @Override
-        public void saveStoryDataAsync(StoryData storyData) {
+        public void saveStoryDataAsync(ChapterData storyData) {
             // TODO: 2023/1/20
         }
     };
