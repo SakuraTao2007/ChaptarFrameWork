@@ -1,3 +1,7 @@
 # StoryChapterFrameWork
 
-~todo
+-------------------// TODO //-------------------
+
+    [X] Finish Base Framework
+
+-------------------// TODO //-------------------
