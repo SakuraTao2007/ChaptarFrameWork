@@ -32,7 +32,7 @@ public class ChapterHandler {
                 storyChapterFrameWork.getLogger().info("[!] WARM! WARM! WARM! WARM! WARM! WARM!");
                 storyChapterFrameWork.getLogger().info("[!]          默认剧情文件夹不存在         ");
                 storyChapterFrameWork.getLogger().info("[!]              已重新生成              ");
-                storyChapterFrameWork.getLogger().info("[!] WARM! WARM! WARM! WARM! WARM! WARM!");
+                storyChapterFrameWork.getLogger().info("[!] !MRAW !MRAW !MRAW !MRAW !MRAW !MRAW");
             }
         } else {
             for (File file : Objects.requireNonNull(pathFile.listFiles())) {
