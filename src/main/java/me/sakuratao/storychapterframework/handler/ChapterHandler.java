@@ -1,7 +1,7 @@
 package me.sakuratao.storychapterframework.handler;
 
 import lombok.Getter;
-import me.sakuratao.storychapterframework.StoryChapterFrameWork;
+import me.sakuratao.storychapterframework.StoryChapterFramework;
 import me.sakuratao.storychapterframework.data.Chapter.ChapterData;
 import me.sakuratao.storychapterframework.data.Chapter.TaskData;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -18,7 +18,7 @@ import java.util.Objects;
 public class ChapterHandler {
 
     @Wire
-    StoryChapterFrameWork storyChapterFrameWork;
+    StoryChapterFramework storyChapterFrameWork;
     @Getter
     private final List<ChapterData> chapterList = new ArrayList<>();
 

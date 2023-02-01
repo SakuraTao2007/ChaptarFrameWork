@@ -7,16 +7,15 @@ import me.sakuratao.storychapterframework.api.SCFWAPI;
 import me.sakuratao.storychapterframework.api.SCFWAPIProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
-import top.jingwenmc.spigotpie.common.instance.Wire;
 
 @PieComponent
-public final class StoryChapterFrameWork extends JavaPlugin {
+public final class StoryChapterFramework extends JavaPlugin {
 
     @Getter
-    public static StoryChapterFrameWork staticInstance;
+    public static StoryChapterFramework staticInstance;
 
     @Getter
-    public ProtocolManager plibapi = ProtocolLibrary.getProtocolManager();
+    public ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
 
     @Override
     public void onLoad() {
@@ -32,7 +31,6 @@ public final class StoryChapterFrameWork extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
     }
 
 }

@@ -7,7 +7,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import me.sakuratao.storychapterframework.StoryChapterFrameWork;
+import me.sakuratao.storychapterframework.StoryChapterFramework;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
 import top.jingwenmc.spigotpie.common.instance.Wire;
 
@@ -21,7 +21,7 @@ public class DatabaseAccessor {
     DataSource dataSource;
 
     @Wire
-    StoryChapterFrameWork plugin;
+    StoryChapterFramework plugin;
 
     public void reconnect() throws SQLException {
         HikariConfig hikariConfig = new HikariConfig();

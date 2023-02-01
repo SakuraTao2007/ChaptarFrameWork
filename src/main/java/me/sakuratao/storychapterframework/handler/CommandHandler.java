@@ -1,6 +1,6 @@
 package me.sakuratao.storychapterframework.handler;
 
-import me.sakuratao.storychapterframework.StoryChapterFrameWork;
+import me.sakuratao.storychapterframework.StoryChapterFramework;
 import me.sakuratao.storychapterframework.utils.ChatColor;
 import me.sakuratao.storychapterframework.utils.helper.MessageHelper;
 import me.sakuratao.storychapterframework.utils.helper.SchedulerHelper;
@@ -13,7 +13,7 @@ import top.jingwenmc.spigotpie.common.instance.Wire;
 public class CommandHandler implements SchedulerHelper, MessageHelper {
 
     @Wire
-    StoryChapterFrameWork storyChapterFrameWork;
+    StoryChapterFramework storyChapterFrameWork;
 
     @PieCommand(value = "scfw",permission = "scfw.command", bungeeCord = false, spigot = true)
     public void onMainCommand(CommandSender sender){

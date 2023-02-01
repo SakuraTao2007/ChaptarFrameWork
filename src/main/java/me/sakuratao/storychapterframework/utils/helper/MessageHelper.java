@@ -4,11 +4,10 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
-import me.sakuratao.storychapterframework.StoryChapterFrameWork;
+import me.sakuratao.storychapterframework.StoryChapterFramework;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.function.Consumer;
 
 public interface MessageHelper {
 
@@ -42,7 +41,7 @@ public interface MessageHelper {
         pc.getChatComponents().write(0, WrappedChatComponent.fromText(string));
 
         try {
-            StoryChapterFrameWork.staticInstance.plibapi.sendServerPacket(player, pc);
+            StoryChapterFramework.staticInstance.protocolManager.sendServerPacket(player, pc);
         } catch (InvocationTargetException var4) {
             var4.printStackTrace();
         }
@@ -61,7 +60,7 @@ public interface MessageHelper {
         pc.getChatComponents().write(0, WrappedChatComponent.fromText(string));
 
         try {
-            StoryChapterFrameWork.staticInstance.plibapi.sendServerPacket(player, pc);
+            StoryChapterFramework.staticInstance.protocolManager.sendServerPacket(player, pc);
         } catch (InvocationTargetException var4) {
             var4.printStackTrace();
         }

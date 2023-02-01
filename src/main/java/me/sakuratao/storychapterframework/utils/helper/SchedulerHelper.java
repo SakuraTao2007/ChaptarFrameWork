@@ -1,10 +1,8 @@
 package me.sakuratao.storychapterframework.utils.helper;
 
-import me.sakuratao.storychapterframework.StoryChapterFrameWork;
+import me.sakuratao.storychapterframework.StoryChapterFramework;
 import org.bukkit.Bukkit;
-import org.bukkit.scheduler.BukkitTask;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
-import top.jingwenmc.spigotpie.common.instance.Wire;
 
 @PieComponent
 public interface SchedulerHelper {
@@ -18,7 +16,7 @@ public interface SchedulerHelper {
      * @param interval - 每次执行间隔 (ticks)
      */
     default void taskTimer(Runnable runnable, long delay, long interval) {
-         Bukkit.getScheduler().runTaskTimer(StoryChapterFrameWork.staticInstance, runnable, delay, interval);
+         Bukkit.getScheduler().runTaskTimer(StoryChapterFramework.staticInstance, runnable, delay, interval);
     }
 
     /**
@@ -30,7 +28,7 @@ public interface SchedulerHelper {
      * @param interval - 每次执行间隔 (ticks)
      */
     default void taskTimerAsync(Runnable runnable, long delay, long interval) {
-         Bukkit.getScheduler().runTaskTimerAsynchronously(StoryChapterFrameWork.staticInstance, runnable, delay, interval);
+         Bukkit.getScheduler().runTaskTimerAsynchronously(StoryChapterFramework.staticInstance, runnable, delay, interval);
     }
 
     /**
@@ -40,7 +38,7 @@ public interface SchedulerHelper {
      * @param runnable - 需要提供的 Runnable
      */
     default void task(Runnable runnable) {
-         Bukkit.getScheduler().runTask(StoryChapterFrameWork.staticInstance, runnable);
+         Bukkit.getScheduler().runTask(StoryChapterFramework.staticInstance, runnable);
     }
 
     /**
@@ -50,7 +48,7 @@ public interface SchedulerHelper {
      * @param runnable - 需要提供的 Runnable
      */
     default void taskAsync(Runnable runnable) {
-         Bukkit.getScheduler().runTaskAsynchronously(StoryChapterFrameWork.staticInstance, runnable);
+         Bukkit.getScheduler().runTaskAsynchronously(StoryChapterFramework.staticInstance, runnable);
     }
 
     /**
@@ -61,7 +59,7 @@ public interface SchedulerHelper {
      * @param delay - 延迟 ticks
      */
     default void taskLater(Runnable runnable, long delay) {
-         Bukkit.getScheduler().runTaskLater(StoryChapterFrameWork.staticInstance, runnable, delay);
+         Bukkit.getScheduler().runTaskLater(StoryChapterFramework.staticInstance, runnable, delay);
     }
 
     /**
@@ -72,7 +70,7 @@ public interface SchedulerHelper {
      * @param delay - 延迟 ticks
      */
     default void taskLaterAsync(Runnable runnable, long delay) {
-         Bukkit.getScheduler().runTaskLaterAsynchronously(StoryChapterFrameWork.staticInstance, runnable, delay);
+         Bukkit.getScheduler().runTaskLaterAsynchronously(StoryChapterFramework.staticInstance, runnable, delay);
     }
     
 }
