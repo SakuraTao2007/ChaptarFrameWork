@@ -1,8 +1,9 @@
 package me.sakuratao.storychapterframework.handler;
 
+import lombok.Getter;
 import me.sakuratao.storychapterframework.StoryChapterFrameWork;
 import me.sakuratao.storychapterframework.data.Chapter.ChapterData;
-import me.sakuratao.storychapterframework.data.Chapter.Tasks;
+import me.sakuratao.storychapterframework.data.Chapter.TaskData;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
@@ -18,10 +19,10 @@ public class ChapterHandler {
 
     @Wire
     StoryChapterFrameWork storyChapterFrameWork;
+    @Getter
+    private final List<ChapterData> chapterList = new ArrayList<>();
 
     private final String path = storyChapterFrameWork.getDataFolder().getPath() + "chapter";
-
-    private final List<ChapterData> chapterList = new ArrayList<>();
 
     public void init(){
 
@@ -40,30 +41,30 @@ public class ChapterHandler {
 
                 ChapterData chapterData = new ChapterData();
                 chapterData.setId(chapter.getInt("chapter_id"));
-                chapterData.setChapter_name(chapter.getString("chapter_name"));
+                chapterData.setChapterName(chapter.getString("chapter_name"));
 
-                storyChapterFrameWork.getLogger().info("| 正在加载章节 " + chapterData.getChapter_name() + " | ID: " + chapterData.getId() + "...");
+                storyChapterFrameWork.getLogger().info("| 正在加载章节 " + chapterData.getChapterName() + " / ID: " + chapterData.getId() + "...");
 
                 for (String section : Objects.requireNonNull(chapter.getConfigurationSection("section")).getKeys(false)){
 
                     String sectionName = chapter.getString("section." + section);
-                    List<Tasks> tasksList = new ArrayList<>();
+                    List<TaskData> tasksList = new ArrayList<>();
                     for (String tasks : chapter.getConfigurationSection("section." + sectionName + ".tasks").getKeys(false)) {
 
-                        Tasks task = new Tasks();
+                        TaskData task = new TaskData();
                         task.setId(chapter.getInt("section." + sectionName + ".tasks." + tasks + ".id"));
                         task.setTaskName(chapter.getString("section." + sectionName + ".tasks." + tasks + ".name"));
                         task.setSetting(chapter.getStringList("section." + sectionName + ".tasks." + tasks + "setting"));
                         tasksList.add(task);
 
                     }
-                    chapterData.getSection().put(sectionName, tasksList);
+                    chapterData.getSections().put(sectionName, tasksList);
                     storyChapterFrameWork.getLogger().info("| 已加载子节 " + sectionName + ".");
 
                 }
 
                 chapterList.add(chapterData);
-                storyChapterFrameWork.getLogger().info("| 已加载章节 " + chapterData.getChapter_name() + " | ID: " + chapterData.getId() + ".");
+                storyChapterFrameWork.getLogger().info("| 已加载章节 " + chapterData.getChapterName() + " / ID: " + chapterData.getId() + ".");
 
             }
         }

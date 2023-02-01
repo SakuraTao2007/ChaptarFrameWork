@@ -9,7 +9,6 @@ public class SCFWAPIProvider {
     @Getter
     private static SCFWAPI SCFWAPI;
 
-
     public void setSCFWAPI(SCFWAPI SCFWAPI) {
         SCFWAPIProvider.SCFWAPI = SCFWAPI;
     }

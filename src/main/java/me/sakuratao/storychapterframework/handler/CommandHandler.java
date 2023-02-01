@@ -22,7 +22,7 @@ public class CommandHandler implements SchedulerHelper, MessageHelper {
         sender.sendMessage(ChatColor.translate("&r  &f&lStoryChapterFrameWork &8| &fVer: &7" + storyChapterFrameWork.getDescription().getVersion()));
         sender.sendMessage(ChatColor.translate("&r  &fAuthor: &7" + storyChapterFrameWork.getDescription().getAuthors()));
         sender.sendMessage(ChatColor.translate("&r"));
-        sender.sendMessage(ChatColor.translate("&r   &7* &f/scfw storyChapter &8| &f查看故事章节列表"));
+        sender.sendMessage(ChatColor.translate("&r   &7* &f/scfw storyChapter &8| &f查看故事章节指令树"));
         sender.sendMessage(ChatColor.translate("&r"));
         sender.sendMessage(ChatColor.translate("&8&m---»--*-------------------------------------*--«---"));
     }

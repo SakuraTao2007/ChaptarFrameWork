@@ -3,7 +3,6 @@ package me.sakuratao.storychapterframework.data.Chapter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,7 @@ import java.util.Map;
 public class ChapterData {
 
     int id;
-    String chapter_name = null;
-    Map<String, List<Tasks>> section = new HashMap<>();
+    String chapterName = null;
+    Map<String, List<TaskData>> sections = new HashMap<>();
 
 }

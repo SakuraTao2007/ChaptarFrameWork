@@ -12,6 +12,8 @@ import java.util.function.Consumer;
 
 public interface MessageHelper {
 
+
+
     /**
      *
      * 通过 Title 显示文本
