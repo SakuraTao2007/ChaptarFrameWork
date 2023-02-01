@@ -42,6 +42,7 @@ public class ChapterHandler {
                 ChapterData chapterData = new ChapterData();
                 chapterData.setId(chapter.getInt("chapter_id"));
                 chapterData.setChapterName(chapter.getString("chapter_name"));
+                chapterData.setChapterVersion(chapter.getString("version"));
 
                 storyChapterFrameWork.getLogger().info("| 正在加载章节 " + chapterData.getChapterName() + " / ID: " + chapterData.getId() + "...");
 

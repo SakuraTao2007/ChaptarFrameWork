@@ -10,11 +10,10 @@ import java.util.Map;
 
 @Data
 @NoArgsConstructor
-public class ChapterData {
+public class SectionData {
 
-    int id;
-    String chapterName = "";
-    String chapterVersion = "";
-    List<SectionData> sections = new ArrayList<>();
-
+    int id = 1;
+    String sectionName = "";
+    List<TaskData> tasks = new ArrayList<>();
+    
 }

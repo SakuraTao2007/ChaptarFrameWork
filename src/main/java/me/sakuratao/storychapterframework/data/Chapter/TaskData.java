@@ -1,11 +1,13 @@
 package me.sakuratao.storychapterframework.data.Chapter;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class TaskData {
 
     int id = 1; // 任务顺序名

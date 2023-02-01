@@ -17,4 +17,5 @@ public class DatabaseConfiguration extends BaseConfiguration {
     public static String mysqlUsername = "root";
     @Configuration(value = "mysql.password")
     public static String mysqlPassword = "123456";
+
 }
