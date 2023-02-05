@@ -22,7 +22,9 @@ public class DataAccessorHandler {
     final DataAccessor dataAccessor;
 
     public DataAccessorHandler() throws SQLException {
+
         databaseAccessor.reconnect();
+
         dataAccessor = new DataAccessor() {
             @Override
             public void readPlayerDataByUUIDAsync(UUID uuid, Consumer<PlayerData> callback) {
