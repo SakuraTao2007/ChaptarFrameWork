@@ -77,11 +77,8 @@ public class ChapterHandler {
         
     }
 
-    public void execute(Player player, ChapterData chapterData){
-
-
+    public void decodeAndExecute(Player player, String setting) {
 
     }
-
 
 }

@@ -6,8 +6,7 @@ import top.jingwenmc.spigotpie.common.instance.PieComponent;
 
 @PieComponent
 @SpigotEventListener
-public class
-PlayerListener implements Listener {
+public class PlayerListener implements Listener {
 
     public PlayerListener() {
     }
