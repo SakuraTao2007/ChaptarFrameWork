@@ -3,6 +3,7 @@ package me.sakuratao.storychapterframework.handler;
 import lombok.Getter;
 import me.sakuratao.storychapterframework.StoryChapterFramework;
 import me.sakuratao.storychapterframework.data.Chapter.ChapterData;
+import me.sakuratao.storychapterframework.data.Chapter.SectionData;
 import me.sakuratao.storychapterframework.data.Chapter.TaskData;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -39,6 +40,7 @@ public class ChapterHandler {
 
                 YamlConfiguration chapter = YamlConfiguration.loadConfiguration(file);
 
+
                 ChapterData chapterData = new ChapterData();
                 chapterData.setId(chapter.getInt("chapter_id"));
                 chapterData.setChapterName(chapter.getString("chapter_name"));
@@ -48,8 +50,11 @@ public class ChapterHandler {
 
                 for (String section : Objects.requireNonNull(chapter.getConfigurationSection("section")).getKeys(false)){
 
+                    SectionData sectionData = new SectionData();
                     String sectionName = chapter.getString("section." + section);
-                    List<TaskData> tasksList = new ArrayList<>();
+                    sectionData.setId(chapter.getInt("section." + sectionName + ".id")); // TODO: 2023/2/5 复核
+                    sectionData.setSectionName(sectionName);
+                    List<TaskData> tasksList = sectionData.getTasks();
                     for (String tasks : chapter.getConfigurationSection("section." + sectionName + ".tasks").getKeys(false)) {
 
                         TaskData task = new TaskData();
@@ -59,7 +64,7 @@ public class ChapterHandler {
                         tasksList.add(task);
 
                     }
-                    chapterData.getSections().put(sectionName, tasksList);
+                    chapterData.getSections().add(sectionData);
                     storyChapterFrameWork.getLogger().info("| 已加载子节 " + sectionName + ".");
 
                 }
