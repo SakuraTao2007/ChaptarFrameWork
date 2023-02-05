@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.sakuratao</groupId>
-    <artifactId>SCF</artifactId>
+    <artifactId>CFW</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>StoryChapterFrameWork</name>
+    <name>ChapterFrameWork</name>
 
-    <description>StoryChapterFramework</description>
+    <description>ChapterFramework</description>
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,7 +43,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern>top.jingwenmc.spigotpie</pattern>
-                                    <shadedPattern>me.sakuratao.storychapterframework.lib.pie</shadedPattern>
+                                    <shadedPattern>me.sakuratao.chapterframework.lib.pie</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
