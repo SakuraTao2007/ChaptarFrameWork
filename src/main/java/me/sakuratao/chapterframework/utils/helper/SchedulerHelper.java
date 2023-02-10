@@ -2,6 +2,8 @@ package me.sakuratao.chapterframework.utils.helper;
 
 import me.sakuratao.chapterframework.ChapterFramework;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
 
 @PieComponent
@@ -29,6 +31,10 @@ public interface SchedulerHelper {
      */
     default void taskTimerAsync(Runnable runnable, long delay, long interval) {
          Bukkit.getScheduler().runTaskTimerAsynchronously(ChapterFramework.STATIC_INSTANCE, runnable, delay, interval);
+    }
+
+    default BukkitTask taskTimerAsync(Player player, Runnable runnable, long delay, long interval) {
+        return Bukkit.getScheduler().runTaskTimerAsynchronously(ChapterFramework.STATIC_INSTANCE, runnable, delay, interval);
     }
 
     /**

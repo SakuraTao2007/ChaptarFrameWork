@@ -11,7 +11,14 @@ import java.lang.reflect.InvocationTargetException;
 
 public interface MessageHelper {
 
-
+    /**
+     *
+     * @param string - 需要染色的文本
+     * @return 变色好的句子
+     */
+    default String translateColor(String string) {
+        return org.bukkit.ChatColor.translateAlternateColorCodes('&', string);
+    }
 
     /**
      *
@@ -41,7 +48,7 @@ public interface MessageHelper {
         pc.getChatComponents().write(0, WrappedChatComponent.fromText(string));
 
         try {
-            ChapterFramework.STATIC_INSTANCE.protocolManager.sendServerPacket(player, pc);
+            ChapterFramework.STATIC_INSTANCE.getProtocolManager().sendServerPacket(player, pc);
         } catch (InvocationTargetException var4) {
             var4.printStackTrace();
         }
@@ -60,7 +67,7 @@ public interface MessageHelper {
         pc.getChatComponents().write(0, WrappedChatComponent.fromText(string));
 
         try {
-            ChapterFramework.STATIC_INSTANCE.protocolManager.sendServerPacket(player, pc);
+            ChapterFramework.STATIC_INSTANCE.getProtocolManager().sendServerPacket(player, pc);
         } catch (InvocationTargetException var4) {
             var4.printStackTrace();
         }
