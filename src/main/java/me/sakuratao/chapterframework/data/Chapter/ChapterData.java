@@ -10,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 public class ChapterData {
 
-    int id;
     String chapterName = "";
     String chapterVersion = "";
     List<SectionData> sections = new ArrayList<>();

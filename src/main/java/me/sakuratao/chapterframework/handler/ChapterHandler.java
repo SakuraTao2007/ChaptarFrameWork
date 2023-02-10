@@ -31,9 +31,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
     @Wire
     PlayerDataHandler playerDataHandler;
 
-    @Getter
-    private List<ChapterData> chapterList = new ArrayList<>();
-
+    @Getter ChapterData chapterData;
     private final String path = chapterFrameWork.getDataFolder().getPath() + "chapter";
 
     public void init(){
@@ -52,11 +50,10 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 YamlConfiguration chapter = YamlConfiguration.loadConfiguration(file);
 
                 ChapterData chapterData = new ChapterData();
-                chapterData.setId(chapter.getInt("chapter_id"));
                 chapterData.setChapterName(chapter.getString("chapter_name"));
                 chapterData.setChapterVersion(chapter.getString("version"));
 
-                chapterFrameWork.getLogger().info("| 正在加载章节 " + chapterData.getChapterName() + " / ID: " + chapterData.getId()  + " / Ver: " + chapterData.getChapterVersion() + "...");
+                chapterFrameWork.getLogger().info("| 正在加载章节 " + chapterData.getChapterName() + " / Ver: " + chapterData.getChapterVersion() + "...");
 
                 for (String section : Objects.requireNonNull(chapter.getConfigurationSection("section")).getKeys(false)){
 
@@ -79,21 +76,17 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
 
                 }
 
-                chapterList.add(chapterData);
-                chapterList = chapterList.stream() // 看不懂没关系，用于重新排序的
-                        .peek(c -> {
-                            c.setSections(
-                                c.getSections().stream()
-                                    .peek(sectionData -> {
-                                        sectionData.setTasks(
-                                            sectionData.getTasks().stream().sorted(Comparator.comparing(TaskData::getId)).toList()
-                                        );
-                                    }).sorted(Comparator.comparing(SectionData::getId)).toList()
+                chapterData.setSections( // 用于重新排序子节与任务，方便后续管理
+                    chapterData.getSections().stream()
+                        .peek(sectionData -> {
+                            sectionData.setTasks(
+                                sectionData.getTasks().stream().sorted(Comparator.comparing(TaskData::getId)).toList()
                             );
-                        })
-                        .sorted(Comparator.comparing(ChapterData::getId)).toList();
+                        }).sorted(Comparator.comparing(SectionData::getId)).toList()
+                );
 
-                chapterFrameWork.getLogger().info("| 已加载章节 " + chapterData.getChapterName() + " / ID: " + chapterData.getId() + ".");
+                this.chapterData = chapterData;
+                chapterFrameWork.getLogger().info("| 已加载章节 " + chapterData.getChapterName() + ".");
 
             }
         }

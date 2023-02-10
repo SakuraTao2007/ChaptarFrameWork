@@ -9,6 +9,8 @@ import java.util.function.Consumer;
 
 public interface CFW_API {
 
+    ChapterData chapterData();
+
     DataAccessor dataAccessor = new DataAccessor() {
         @Override
         public void readPlayerDataByUUIDAsync(UUID uuid, Consumer<PlayerData> callback) {
