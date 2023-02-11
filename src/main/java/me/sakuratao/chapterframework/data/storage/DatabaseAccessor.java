@@ -7,7 +7,9 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.Getter;
 import me.sakuratao.chapterframework.ChapterFramework;
+import me.sakuratao.chapterframework.data.player.PlayerData;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
 import top.jingwenmc.spigotpie.common.instance.Wire;
 
@@ -19,6 +21,9 @@ import java.sql.SQLException;
 public class DatabaseAccessor {
     ConnectionSource connectionSource;
     DataSource dataSource;
+
+    @Getter
+    Dao<PlayerData, String> playerDataDao;
 
     @Wire
     ChapterFramework plugin;
@@ -36,7 +41,7 @@ public class DatabaseAccessor {
         }
         dataSource = new HikariDataSource(hikariConfig);
         connectionSource = new DataSourceConnectionSource(dataSource, DatabaseConfiguration.MYSQL_URL);
-        //create dao
+        playerDataDao = createDao(PlayerData.class,"");
     }
 
     public void close() throws Exception {

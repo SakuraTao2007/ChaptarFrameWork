@@ -4,6 +4,7 @@ import me.sakuratao.chapterframework.ChapterFramework;
 import me.sakuratao.chapterframework.data.cache.CacheData;
 import me.sakuratao.chapterframework.data.player.PlayerData;
 import me.sakuratao.chapterframework.enums.PermissionType;
+import me.sakuratao.chapterframework.handler.DataAccessorHandler;
 import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.tasks.RegularLoopExecutionTask;
 import me.sakuratao.chapterframework.utils.helper.MessageHelper;
@@ -25,6 +26,8 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
     ChapterFramework chapterFramework;
     @Wire
     PlayerDataHandler playerDataHandler;
+    @Wire
+    DataAccessorHandler dataAccessorHandler;
 
     public PlayerListener() {
     }
@@ -61,6 +64,8 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
         Player player = event.getPlayer();
         chapterFramework.getCacheData().getBukkitTaskMap().get(event.getPlayer()).cancel();
         chapterFramework.getCacheData().getBukkitTaskMap().remove(player);
+        dataAccessorHandler.getDataAccessor().savePlayerDataAsync(playerDataHandler.getPlayerData(player));
+        playerDataHandler.removePlayerData(player);
 
     }
 

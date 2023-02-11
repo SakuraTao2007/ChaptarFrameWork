@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 public class RegularLoopExecutionTask implements Runnable {
 
     Player player;
-
     PlayerData playerData;
 
     public RegularLoopExecutionTask(Player player) {
@@ -18,7 +17,7 @@ public class RegularLoopExecutionTask implements Runnable {
     @Override
     public void run() {
 
-        if (playerData.getDelayTime() > System.currentTimeMillis()) { return; }
+        if (playerData.getDelayTime() > System.currentTimeMillis()) { return; } // TODO: 2023/2/11 剧情与任务进度 
 
 
     }

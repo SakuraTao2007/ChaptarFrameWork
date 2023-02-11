@@ -5,6 +5,7 @@ import me.sakuratao.chapterframework.ChapterFramework;
 import me.sakuratao.chapterframework.data.Chapter.ChapterData;
 import me.sakuratao.chapterframework.data.Chapter.SectionData;
 import me.sakuratao.chapterframework.data.Chapter.TaskData;
+import me.sakuratao.chapterframework.data.player.PlayerData;
 import me.sakuratao.chapterframework.enums.ActionType;
 import me.sakuratao.chapterframework.enums.DelayType;
 import me.sakuratao.chapterframework.enums.PermissionType;
@@ -34,15 +35,17 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
     @Getter ChapterData chapterData;
     private final String path = chapterFrameWork.getDataFolder().getPath() + "chapter";
 
-    public void init(){
+    public static ChapterHandler STATIC_INSTANCE;
 
+    public void init(){
+        STATIC_INSTANCE = this;
         File pathFile = new File(path);
         if (!pathFile.exists()){
             if (pathFile.mkdirs()) {
-                chapterFrameWork.getLogger().info("[!] WARM! WARM! WARM! WARM! WARM! WARM! WARM!");
-                chapterFrameWork.getLogger().info("[!]              默认剧情文件夹不存在           ");
-                chapterFrameWork.getLogger().info("[!]                  已重新生成                ");
-                chapterFrameWork.getLogger().info("[!] !MRAW !MRAW !MRAW !MRAW !MRAW !MRAW !MRAW");
+                chapterFrameWork.getLogger().info("|  WARM! WARM! WARM! WARM! WARM! WARM! WARM! WARM! WARM! WARM!");
+                chapterFrameWork.getLogger().info("|                   DEFAULT FOLDER NOT FOUND                  ");
+                chapterFrameWork.getLogger().info("|                        WE RESPAWN IT                         ");
+                chapterFrameWork.getLogger().info("|  WARM! WARM! WARM! WARM! WARM! WARM! WARM! WARM! WARM! WARM!");
             }
         } else {
             for (File file : Objects.requireNonNull(pathFile.listFiles())) {
@@ -53,7 +56,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 chapterData.setChapterName(chapter.getString("chapter_name"));
                 chapterData.setChapterVersion(chapter.getString("version"));
 
-                chapterFrameWork.getLogger().info("| 正在加载章节 " + chapterData.getChapterName() + " / Ver: " + chapterData.getChapterVersion() + "...");
+                chapterFrameWork.getLogger().info("| Loading Chapter " + chapterData.getChapterName() + " / Ver: " + chapterData.getChapterVersion() + "...");
 
                 for (String section : Objects.requireNonNull(chapter.getConfigurationSection("section")).getKeys(false)){
 
@@ -72,7 +75,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
 
                     }
                     chapterData.getSections().add(sectionData);
-                    chapterFrameWork.getLogger().info("| 已加载子节 " + sectionName + ".");
+                    chapterFrameWork.getLogger().info("| Loaded Section " + sectionName + ".");
 
                 }
 
@@ -98,6 +101,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
         taskAsync(() -> {
 
             List<String> segmentation = Arrays.stream(setting.split("")).toList();
+            PlayerData playerData = playerDataHandler.getPlayerData(player);
             Audience audience = this.chapterFrameWork.getAdventure().player(player);
             if (segmentation.get(0).equalsIgnoreCase(ActionType.DELAY.getAction())) {
                 if (segmentation.size() != 3) {
@@ -133,9 +137,10 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 String taskId = segmentation.get(1);
                 data.getSections().get(1).getTasks().forEach(t -> {
                     if (!(Integer.getInteger(taskId).equals(t.getId()))){
-
+                         playerData.getProgressData().setTaskData(playerData.getProgressData().getSectionData().getTasks().get(Integer.parseInt(taskId)));
                     }
                 });
+                return;
             }
              /*
              if (this.chapterFrameWork.isDebugged()) {
