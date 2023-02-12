@@ -32,13 +32,12 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
     @Wire
     PlayerDataHandler playerDataHandler;
     @Getter ChapterData chapterData;
-    private final String path = chapterFrameWork.getDataFolder().getPath() + "chapter";
 
     public static ChapterHandler STATIC_INSTANCE;
 
     public void init(){
         STATIC_INSTANCE = this;
-        File pathFile = new File(path);
+        File pathFile = new File(chapterFrameWork.getDataFolder().getPath() + "chapter");
         if (!pathFile.exists()){
             if (pathFile.mkdirs()) {
                 chapterFrameWork.getLogger().info("|  WARM! WARM! WARM! WARM! WARM! WARM! WARM! WARM! WARM! WARM!");
@@ -80,11 +79,9 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
 
                 chapterData.setSections( // 用于重新排序子节与任务，方便后续管理
                     chapterData.getSections().stream()
-                        .peek(sectionData -> {
-                            sectionData.setTasks(
-                                sectionData.getTasks().stream().sorted(Comparator.comparing(TaskData::getId)).toList()
-                            );
-                        }).sorted(Comparator.comparing(SectionData::getId)).toList()
+                        .peek(sectionData -> sectionData.setTasks(
+                            sectionData.getTasks().stream().sorted(Comparator.comparing(TaskData::getId)).toList()
+                        )).sorted(Comparator.comparing(SectionData::getId)).toList()
                 );
 
                 this.chapterData = chapterData;

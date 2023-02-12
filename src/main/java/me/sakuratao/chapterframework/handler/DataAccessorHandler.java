@@ -24,9 +24,10 @@ public class DataAccessorHandler {
     public static DataAccessorHandler STATIC_INSTANCE;
 
     @Getter
-    final DataAccessor dataAccessor;
+    DataAccessor dataAccessor;
 
-    public DataAccessorHandler() throws SQLException {
+    @SneakyThrows
+    public void init() {
         STATIC_INSTANCE = this;
         databaseAccessor.reconnect();
 

@@ -56,7 +56,7 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
         SpigotPieSpigot.inject(this,"META-INF", "org", "com", "dev", "net", "org");
         getLogger().info("|                -/ Loaded SpigotPie /-                   ");
         getLogger().info("|                                                             ");
-        getLogger().info("|           -/ We are doing some initiation /-            ");
+        getLogger().info("|         -/ We are doing some initialization /-            ");
         cacheData = new CacheData();
         chapterHandler.init();
         dataAccessorHandler.init();
