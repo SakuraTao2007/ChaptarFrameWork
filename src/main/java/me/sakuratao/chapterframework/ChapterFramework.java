@@ -25,9 +25,8 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
 
     public static ChapterFramework STATIC_INSTANCE;
 
-    @Getter ProtocolManager protocolManager = ProtocolLibrary.getProtocolManager();
     @Getter BukkitAudiences adventure;
-    @Getter CacheData cacheData = new CacheData();
+    @Getter CacheData cacheData;
     @Getter @Setter boolean debugged = false;
 
 
@@ -40,7 +39,7 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
     @Override
     public void onEnable() {
         getLogger().info("|                                                             ");
-        getLogger().info("|                       -/ WELCOME BACK /-                    ");
+        getLogger().info("|                   -/ WELCOME BACK /-                    ");
         getLogger().info("|                                                             ");
         getLogger().info("| _________ .__                   __                          ");
         getLogger().info("| \\_   ___ \\|  |__ _____  _______/  |_  ___________         ");
@@ -49,11 +48,12 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
         getLogger().info("|  \\______  /___|  (____  /   __/|__|  \\___  >__|           ");
         getLogger().info("|         \\/     \\/     \\/|__|             \\/             ");
         getLogger().info("|                                                             ");
-        getLogger().info("|                 -/ We are loading SpigotPie /-              ");
-        SpigotPieSpigot.inject(this,"META-INF","org");
-        getLogger().info("|                    -/ Loaded SpigotPie /-                   ");
+        getLogger().info("|             -/ We are loading SpigotPie /-              ");
+        SpigotPieSpigot.inject(this,"META-INF", "org", "com", "dev", "net", "org");
+        getLogger().info("|                -/ Loaded SpigotPie /-                   ");
         getLogger().info("|                                                             ");
-        getLogger().info("|               -/ We are doing some initiation /-            ");
+        getLogger().info("|           -/ We are doing some initiation /-            ");
+        cacheData = new CacheData();
         chapterHandler.init();
         if (ConfigHandler.AUTO_SAVE_DATA){
             taskTimerAsync(new DataSaveLoopTask(), 0, (long) ConfigHandler.AUTO_SAVE_TIME * 60 * 20);
@@ -65,4 +65,7 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
     public void onDisable() {
     }
 
+    public ProtocolManager protocolManager() {
+        return ProtocolLibrary.getProtocolManager();
+    }
 }

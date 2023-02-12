@@ -13,7 +13,7 @@ public interface CFW_API {
     ChapterData chapterData();
 
     default DataAccessor getAccessor() {
-        return DataAccessorHandler.STATIC_INSTANCE.getDataAccessor();;
+        return DataAccessorHandler.STATIC_INSTANCE.getDataAccessor();
     }
 
 }

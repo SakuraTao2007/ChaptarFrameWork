@@ -3,7 +3,7 @@ version: '${project.version}'
 main: me.sakuratao.chapterframework.ChapterFramework
 api-version: 1.19
 prefix: SCFW
-load: STARTUP
+load: POSTWORLD
 loadbefore: [ ProtocolLib ]
 authors: [ SakuraTao, jingwenMC ]
 description: ChapterFrameWork - CFW

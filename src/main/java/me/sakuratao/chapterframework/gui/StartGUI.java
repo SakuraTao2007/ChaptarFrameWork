@@ -32,7 +32,7 @@ public class StartGUI implements SchedulerHelper { // 暂定想法用于开始�
                 ConfigHandler.STARTGUI_ROWS,
                 ConfigHandler.STARTGUI_ITEMS.stream().collect(Collectors.toMap((k -> Integer.parseInt(k.split(":")[0])), (v -> {
                     String[] split = v.split(":");
-                    return ItemBuilder.from(Objects.requireNonNull(Material.getMaterial(split[1]))).amount(Integer.parseInt(split[2])).asGuiItem(); // TODO: 2023/2/12 添加 lore 等 
+                    return ItemBuilder.from(Objects.requireNonNull(Material.getMaterial(split[1]))).amount(Integer.parseInt(split[2])).asGuiItem(); // TODO: 2023/2/12 添加 lore 等
                 }))));
 
     }

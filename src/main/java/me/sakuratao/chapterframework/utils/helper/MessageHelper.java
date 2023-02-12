@@ -48,7 +48,7 @@ public interface MessageHelper {
         pc.getChatComponents().write(0, WrappedChatComponent.fromText(string));
 
         try {
-            ChapterFramework.STATIC_INSTANCE.getProtocolManager().sendServerPacket(player, pc);
+            ChapterFramework.STATIC_INSTANCE.protocolManager().sendServerPacket(player, pc);
         } catch (InvocationTargetException var4) {
             var4.printStackTrace();
         }
@@ -67,7 +67,7 @@ public interface MessageHelper {
         pc.getChatComponents().write(0, WrappedChatComponent.fromText(string));
 
         try {
-            ChapterFramework.STATIC_INSTANCE.getProtocolManager().sendServerPacket(player, pc);
+            ChapterFramework.STATIC_INSTANCE.protocolManager().sendServerPacket(player, pc);
         } catch (InvocationTargetException var4) {
             var4.printStackTrace();
         }
