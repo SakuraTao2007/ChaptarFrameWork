@@ -2,6 +2,7 @@ package me.sakuratao.chapterframework.handler;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
+import me.sakuratao.chapterframework.ChapterFramework;
 import me.sakuratao.chapterframework.data.Chapter.ChapterData;
 import me.sakuratao.chapterframework.data.DataAccessor;
 import me.sakuratao.chapterframework.data.player.PlayerData;
@@ -34,26 +35,25 @@ public class DataAccessorHandler {
         dataAccessor = new DataAccessor() {
             @Override
             public void readPlayerDataByUUIDAsync(UUID uuid, Consumer<PlayerData> callback) {
-                // FIXME: 2023/2/11 复查
-                try {
-                    callback.accept(databaseAccessor.getPlayerDataDao().queryForId(uuid.toString()));
-                    callback.andThen(playerDataHandler::putPlayerData);
-                    PlayerData playerData = playerDataHandler.getPlayerData(uuid);
-                    playerData.decodeProgress(playerData.getProgressEncode());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                ChapterFramework.STATIC_INSTANCE.taskAsync(() -> {
+                    try {
+                        callback.accept(databaseAccessor.getPlayerDataDao().queryForId(uuid.toString()));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
 
             @Override
             public void savePlayerDataAsync(PlayerData playerData) {
-
-                try {
-                    playerData.encodeProgress();
-                    databaseAccessor.getPlayerDataDao().createOrUpdate(playerData);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                ChapterFramework.STATIC_INSTANCE.taskAsync(() -> {
+                    try {
+                        playerData.encodeProgress();
+                        databaseAccessor.getPlayerDataDao().createOrUpdate(playerData);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
 
         };
