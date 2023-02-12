@@ -53,8 +53,6 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
             }
         }
 
-        chapterFramework.getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player),  0, 3));
-
     }
 
     public void onPlayerQuit(PlayerQuitEvent event){
