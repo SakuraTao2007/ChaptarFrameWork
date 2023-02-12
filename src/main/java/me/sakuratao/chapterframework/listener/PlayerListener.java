@@ -39,21 +39,27 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
         event.setJoinMessage("");
 
         Player player = event.getPlayer();
-        PlayerData playerData = new PlayerData(player, player.getName(), player.getUniqueId());
-
-        if (chapterFramework.isDebugged()) {
-            if (playerDataHandler.putPlayerData(player.getUniqueId(), playerData)) {
-                Bukkit.getOnlinePlayers().forEach(p -> {
-                    if (p.hasPermission(PermissionType.COMMAND.getPermission()))
-                        p.sendMessage(translateColor("&8&| &7&o&nDebug / 已创建并存储 PlayerData for " + player.getName()));
-                });
-            } else {
-                Bukkit.getOnlinePlayers().forEach(p -> {
-                    if (p.hasPermission(PermissionType.COMMAND.getPermission()))
-                        p.sendMessage(translateColor("&8&| &7&o&nDebug / &c&o&n无法存储 PlayerData for " + player.getName()));
-                });
+        dataAccessorHandler.getDataAccessor().readPlayerDataByUUIDAsync(player.getUniqueId(), playerData -> {
+            if(playerData == null) {
+                playerDataHandler.putPlayerData(new PlayerData(player, player.getName(), player.getUniqueId()));
+                return;
             }
-        }
+            if (chapterFramework.isDebugged()) {
+                if (playerDataHandler.putPlayerData(player.getUniqueId(), playerData)) {
+                    Bukkit.getOnlinePlayers().forEach(p -> {
+                        if (p.hasPermission(PermissionType.COMMAND.getPermission()))
+                            p.sendMessage(translateColor("&8&| &7&o&nDebug / 已创建并存储 PlayerData for " + player.getName()));
+                    });
+                } else {
+                    Bukkit.getOnlinePlayers().forEach(p -> {
+                        if (p.hasPermission(PermissionType.COMMAND.getPermission()))
+                            p.sendMessage(translateColor("&8&| &7&o&nDebug / &c&o&n无法存储 PlayerData for " + player.getName()));
+                    });
+                }
+            }
+        });
+        PlayerData playerData = playerDataHandler.getPlayerData(player);
+
 
     }
 
