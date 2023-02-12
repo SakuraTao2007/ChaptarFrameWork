@@ -1,6 +1,7 @@
 package me.sakuratao.chapterframework.handler;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 import me.sakuratao.chapterframework.data.Chapter.ChapterData;
 import me.sakuratao.chapterframework.data.DataAccessor;
 import me.sakuratao.chapterframework.data.player.PlayerData;

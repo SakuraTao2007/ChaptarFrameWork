@@ -31,7 +31,6 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
     ChapterFramework chapterFrameWork;
     @Wire
     PlayerDataHandler playerDataHandler;
-
     @Getter ChapterData chapterData;
     private final String path = chapterFrameWork.getDataFolder().getPath() + "chapter";
 
@@ -142,7 +141,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 });
                 return;
             }
-            // TODO: 2023/2/12 更多代码解析
+            
              /*
              if (this.chapterFrameWork.isDebugged()) {
                 Bukkit.getOnlinePlayers().forEach(p -> {

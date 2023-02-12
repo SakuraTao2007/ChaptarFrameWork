@@ -1,5 +1,7 @@
 package me.sakuratao.chapterframework.enums;
 
+import org.jetbrains.annotations.Contract;
+
 public enum DelayType {
 
     LAST("Last"),
