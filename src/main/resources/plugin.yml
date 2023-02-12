@@ -1,9 +1,9 @@
-name: StoryChapterFrameWork
+name: ChapterFrameWork
 version: '${project.version}'
-main: me.sakuratao.leaspace_storychapter.Leaspace_StoryChapter
+main: me.sakuratao.chapterframework.ChapterFramework
 api-version: 1.19
 prefix: SCFW
-load: STARTUP
+load: POSTWORLD
 loadbefore: [ ProtocolLib ]
 authors: [ SakuraTao, jingwenMC ]
-description: StoryChapterFrameWork - SCFW
+description: ChapterFrameWork - CFW
