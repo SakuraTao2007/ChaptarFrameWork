@@ -32,6 +32,8 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
     public PlayerListener() {
     }
 
+    
+    
     public void onPlayerJoin(PlayerJoinEvent event) {
 
         event.setJoinMessage("");
