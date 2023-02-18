@@ -29,16 +29,19 @@ public class PlayerDataHandler {
 
     public boolean putPlayerData(@NonNull Player player,@NonNull PlayerData playerData) {
         playerDataMap.put(player.getUniqueId(), playerData);
+        playerData.decodeProgress(playerData.getProgressEncode());
         return true;
     }
 
     public boolean putPlayerData(@NonNull UUID uuid,@NonNull PlayerData playerData) {
         playerDataMap.put(uuid, playerData);
+        playerData.decodeProgress(playerData.getProgressEncode());
         return true;
     }
 
     public boolean putPlayerData(@NonNull PlayerData playerData) {
         playerDataMap.put(playerData.getPlayerUuid(), playerData);
+        playerData.decodeProgress(playerData.getProgressEncode());
         return true;
     }
 

@@ -13,8 +13,10 @@ import me.sakuratao.chapterframework.handler.ChapterHandler;
 import me.sakuratao.chapterframework.handler.ConfigHandler;
 import me.sakuratao.chapterframework.handler.DataAccessorHandler;
 import me.sakuratao.chapterframework.tasks.DataSaveLoopTask;
+import me.sakuratao.chapterframework.utils.NMSUtil;
 import me.sakuratao.chapterframework.utils.helper.SchedulerHelper;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
 import top.jingwenmc.spigotpie.common.instance.Wire;
@@ -31,6 +33,7 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
     @Getter CacheData cacheData;
     @Getter @Setter boolean debugged = false;
 
+    ProtocolManager protocolManager;
 
     @Wire
     ChapterHandler chapterHandler;
@@ -42,8 +45,14 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
 
     @Override
     public void onEnable() {
+        getLogger().info("| Checking environment...");
+        if (NMSUtil.isSupported()) getLogger().info("| Bukkit : " + Bukkit.getBukkitVersion());
+        else {getLogger().info("| UNSUPPORTED BUKKIT!"); return;}
+        if (Integer.parseInt(System.getProperty("java.specification.version")) >= 17) getLogger().info("| Java: " + System.getProperty("java.specification.version"));
+        else {getLogger().info("| UNSUPPORTED JAVA VERSION!"); return;}
+        getLogger().info("| Passed, the environment is fine!                          ");
         getLogger().info("|                                                             ");
-        getLogger().info("|                   -/ WELCOME BACK /-                    ");
+        getLogger().info("| Hi, THERE! WELCOME BACK AGAIN~                              ");
         getLogger().info("|                                                             ");
         getLogger().info("| _________ .__                   __                          ");
         getLogger().info("| \\_   ___ \\|  |__ _____  _______/  |_  ___________         ");
@@ -52,18 +61,33 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
         getLogger().info("|  \\______  /___|  (____  /   __/|__|  \\___  >__|           ");
         getLogger().info("|         \\/     \\/     \\/|__|             \\/             ");
         getLogger().info("|                                                             ");
-        getLogger().info("|             -/ We are loading SpigotPie /-              ");
-        SpigotPieSpigot.inject(this,"META-INF", "org", "com", "dev", "net", "org");
-        getLogger().info("|                -/ Loaded SpigotPie /-                   ");
+        getLogger().info("| Now we are loading SpigotPie...                             ");
         getLogger().info("|                                                             ");
-        getLogger().info("|         -/ We are doing some initialization /-            ");
+        SpigotPieSpigot.inject(this,"META-INF", "org", "com", "dev", "net", "org");
+        getLogger().info("|                                                             ");
+        getLogger().info("| Loaded SpigotPie.                                            ");
+        getLogger().info("|                                                             ");
+        getLogger().info("| We are doing some initialization...                            ");
+        getLogger().info("| Data initializing...                                        ");
         cacheData = new CacheData();
         chapterHandler.init();
         dataAccessorHandler.init();
+        getLogger().info("| Data initialized.                                            ");
         if (ConfigHandler.AUTO_SAVE_DATA){
             taskTimerAsync(new DataSaveLoopTask(), 0, (long) ConfigHandler.AUTO_SAVE_TIME * 60 * 20);
         }
+        getLogger().info("| Checking hooks...                                            ");
+        if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            cacheData.setPAPI(true);
+            getLogger().info("| -/H/- Papi Hooked.                                        ");
+        }
+        if (getServer().getPluginManager().isPluginEnabled("ProtocolLib")) {
+            cacheData.setPROTOCOL_LIB(true);
+            protocolManager = ProtocolLibrary.getProtocolManager();
+            getLogger().info("| -/H/- ProtocolLib Hooked.                                        ");
+        }
         CFW_APIProvider.setCFW_API(() -> chapterHandler.getChapterData());
+        getLogger().info("| API Setup.                                                   ");
     }
 
     @Override
@@ -71,6 +95,6 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
     }
 
     public ProtocolManager protocolManager() {
-        return ProtocolLibrary.getProtocolManager();
+        return protocolManager;
     }
 }

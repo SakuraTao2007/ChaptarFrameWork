@@ -85,7 +85,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 );
 
                 this.chapterData = chapterData;
-                chapterFrameWork.getLogger().info("| 已加载章节 " + chapterData.getChapterName() + ".");
+                chapterFrameWork.getLogger().info("| Loaded Chapter " + chapterData.getChapterName() + ".");
 
             }
         }
@@ -101,7 +101,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
             Audience audience = this.chapterFrameWork.getAdventure().player(player);
             if (segmentation.get(0).equalsIgnoreCase(ActionType.DELAY.getAction())) {
                 if (segmentation.size() != 3) {
-                    player.sendMessage(translateColor("&8&l| &c出现错误 &8~ &c数据中枢异常, 请上报错误代码至跃空研究所！ -/ CODE: DAECE /-"));
+                    player.sendMessage(translateColor("&8&l| &c出现错误 &8~ &c数据中枢异常, 请上报错误代码至跃空研究所！ -/ CODE: DAECE /-")); // FIXME: 2023/2/18 对接 PlayerDataExpand
                     throw new RuntimeException("出现错误 | 在章节 " + data.getChapterName() + " 中, 相关信息如下" + setting + " -/ CODE: DAECE /-");
                 }
                 playerDataHandler.getPlayerData(player).setDelayTime(Long.parseLong(segmentation.get(2)) * 1000 + System.currentTimeMillis());

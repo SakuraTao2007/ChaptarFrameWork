@@ -2,7 +2,9 @@ package me.sakuratao.chapterframework.data.player;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import me.sakuratao.chapterframework.ChapterFramework;
 import me.sakuratao.chapterframework.enums.DelayType;
@@ -16,6 +18,8 @@ import java.util.Arrays;
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @DatabaseTable(tableName = "chapter_player_data")
 public class PlayerData implements MessageHelper {
 
