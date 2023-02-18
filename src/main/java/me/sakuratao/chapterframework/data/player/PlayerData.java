@@ -2,14 +2,9 @@ package me.sakuratao.chapterframework.data.player;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import me.sakuratao.chapterframework.ChapterFramework;
-import me.sakuratao.chapterframework.data.Chapter.ChapterData;
-import me.sakuratao.chapterframework.data.Chapter.SectionData;
-import me.sakuratao.chapterframework.data.Chapter.TaskData;
 import me.sakuratao.chapterframework.enums.DelayType;
 import me.sakuratao.chapterframework.enums.PermissionType;
 import me.sakuratao.chapterframework.handler.ChapterHandler;

@@ -56,11 +56,11 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
 
                 chapterFrameWork.getLogger().info("| Loading Chapter " + chapterData.getChapterName() + " / Ver: " + chapterData.getChapterVersion() + "...");
 
-                for (String section : Objects.requireNonNull(chapter.getConfigurationSection("section")).getKeys(false)){
+                for (String section : Objects.requireNonNull(chapter.getConfigurationSection("section")).getKeys(false)) {
 
                     SectionData sectionData = new SectionData();
                     String sectionName = chapter.getString("section." + section);
-                    sectionData.setId(chapter.getInt("section." + sectionName + ".id")); // TODO: 2023/2/5 复核
+                    sectionData.setId(chapter.getInt("section." + sectionName + ".id"));
                     sectionData.setSectionName(sectionName);
                     List<TaskData> tasksList = sectionData.getTasks();
                     for (String taskNote : chapter.getConfigurationSection("section." + sectionName + ".tasks").getKeys(false)) {
