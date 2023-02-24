@@ -24,8 +24,8 @@ public class ConfigHandler extends BaseConfiguration {
     public static int STARTGUI_ROWS = 3;
     @Configuration(value = "GUI.STARTGUI.ITEMS")
     public static List<String> STARTGUI_ITEMS = Arrays.asList(
-            "1:STONE:1",
-            "ROWS:MATERIAL:AMOUNT"
+            "1:STONE:1:这是一个示例<l>这是一个示例<l>:CONFIRM",
+            "ROWS:MATERIAL:AMOUNT:Lore<l>Lore<l>:"
             );
 
 }

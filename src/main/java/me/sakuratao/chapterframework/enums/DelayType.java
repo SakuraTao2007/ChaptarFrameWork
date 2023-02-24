@@ -12,7 +12,7 @@ public enum DelayType {
         this.delayType = delayType;
     }
 
-    public String getDelayType() {
+    public String getType() {
         return delayType;
     }
 }

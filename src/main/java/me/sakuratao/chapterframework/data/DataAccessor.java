@@ -7,6 +7,6 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 public interface DataAccessor {
-    void readPlayerDataByUUIDAsync(UUID uuid, Consumer<PlayerData> callback);
+    void readPlayerDataByPlayerNameAsync(String playerName, Consumer<PlayerData> callback);
     void savePlayerDataAsync(PlayerData playerData);
 }

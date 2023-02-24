@@ -41,7 +41,7 @@ public class DatabaseAccessor {
         }
         dataSource = new HikariDataSource(hikariConfig);
         connectionSource = new DataSourceConnectionSource(dataSource, DatabaseConfiguration.MYSQL_URL);
-        playerDataDao = createDao(PlayerData.class,"");
+        playerDataDao = createDao(PlayerData.class,"1");
     }
 
     public void close() throws Exception {

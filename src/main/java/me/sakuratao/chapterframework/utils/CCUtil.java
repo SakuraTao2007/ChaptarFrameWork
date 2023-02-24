@@ -1,6 +1,6 @@
 package me.sakuratao.chapterframework.utils;
 
-public class ChatColor {
+public class CCUtil {
 
     public static String Head = org.bukkit.ChatColor.AQUA.toString();
     public static String Scramble = org.bukkit.ChatColor.MAGIC.toString();

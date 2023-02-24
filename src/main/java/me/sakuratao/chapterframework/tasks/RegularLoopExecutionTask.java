@@ -17,7 +17,7 @@ public class RegularLoopExecutionTask implements Runnable {
     @Override
     public void run() {
 
-        if (playerData.getDelayTime() > System.currentTimeMillis()) { return; } // TODO: 2023/2/11 剧情与任务进度 
+        if (playerData.getDelayTime() > System.currentTimeMillis() || playerData.getConditionData() == null) { return; } // TODO: 2023/2/11 剧情与任务进度
 
 
     }

@@ -15,4 +15,7 @@ public class CacheData {
 
     final ConcurrentMap<Player, BukkitTask> bukkitTaskMap = new ConcurrentHashMap<>(); /* for regularLoopExecution */
 
+    boolean PAPI = false;
+    boolean PROTOCOL_LIB = false;
+
 }
