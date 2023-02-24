@@ -22,8 +22,13 @@ public interface MessageHelper {
         if (ChapterFramework.STATIC_INSTANCE.isDebugged()) {
             Bukkit.getOnlinePlayers().forEach(p -> {
                 if (!p.hasPermission(PermissionType.COMMAND.getPermission())) return;
-                if (error) p.sendMessage(translateColor("&8&| &7&o&nDebug / &c&o&n" + debugMessage));
-                else p.sendMessage(translateColor("&8&| &7&o&nDebug / &7&o&n" + debugMessage));
+                if (error) {
+                    p.sendMessage(translateColor("&8&| &7&o&nDebug / &c&o&n" + debugMessage));
+                    ChapterFramework.STATIC_INSTANCE.getLogger().info("| Debug / Error - " + debugMessage);
+                } else {
+                    p.sendMessage(translateColor("&8&| &7&o&nDebug / &7&o&n" + debugMessage));
+                    ChapterFramework.STATIC_INSTANCE.getLogger().info("| Debug / " + debugMessage);
+                }
             });
         }
     }

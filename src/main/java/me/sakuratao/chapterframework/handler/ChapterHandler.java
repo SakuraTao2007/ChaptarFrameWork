@@ -74,6 +74,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                         tasksList.add(task);
 
                     }
+                    sectionData.setTasks(tasksList);
                     chapterData.getSections().add(sectionData);
                     chapterFrameWork.getLogger().info("| Loaded Section " + section + ".");
 

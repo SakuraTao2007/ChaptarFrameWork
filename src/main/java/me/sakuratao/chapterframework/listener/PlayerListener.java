@@ -45,7 +45,9 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
         Player player = event.getPlayer();
         dataAccessorHandler.getDataAccessor().readPlayerDataByUUIDAsync(player.getUniqueId(), playerData -> {
             if(playerData == null) {
-                playerDataHandler.putPlayerData(new PlayerData(player, player.getName(), player.getUniqueId()));
+                PlayerData playerData1 = new PlayerData(player, player.getName(), player.getUniqueId());
+                playerData1.setProgressEncode("0");
+                playerDataHandler.putPlayerData(playerData1);
                 return;
             }
             if (chapterFramework.isDebugged()) {
@@ -57,7 +59,6 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
             }
         });
         PlayerData playerData = playerDataHandler.getPlayerData(player);
-
 
     }
 
