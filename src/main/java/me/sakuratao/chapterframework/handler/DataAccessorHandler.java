@@ -37,7 +37,6 @@ public class DataAccessorHandler {
             public void readPlayerDataByPlayerNameAsync(String playerName, Consumer<PlayerData> callback) {
                 ChapterFramework.STATIC_INSTANCE.taskAsync(() -> {
                     try {
-                        System.out.println(databaseAccessor.getPlayerDataDao().queryForId(playerName));
                         callback.accept(databaseAccessor.getPlayerDataDao().queryForId(playerName));
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -50,7 +49,7 @@ public class DataAccessorHandler {
                 ChapterFramework.STATIC_INSTANCE.taskAsync(() -> {
                     try {
                         playerData.encodeProgress();
-                        if (databaseAccessor.getPlayerDataDao().queryForId(playerData.getPlayer().getName()) != null){
+                        if (databaseAccessor.getPlayerDataDao().queryForId(playerData.getPlayer().getName()) == null){
                             databaseAccessor.getPlayerDataDao().create(playerData);
                         } else databaseAccessor.getPlayerDataDao().update(playerData);
                     } catch (SQLException e) {
