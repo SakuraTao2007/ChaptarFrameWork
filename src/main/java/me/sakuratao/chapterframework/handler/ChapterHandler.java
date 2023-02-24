@@ -72,7 +72,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                         TaskData task = new TaskData();
                         task.setId(chapter.getInt("section." + section + ".tasks." + taskNote + ".id"));
                         task.setTaskName(chapter.getString("section." + section + ".tasks." + taskNote + ".name"));
-                        task.setSetting(chapter.getStringList("section." + section + ".tasks." + taskNote + "setting"));
+                        task.setSetting(chapter.getStringList("section." + section + ".tasks." + taskNote + ".setting"));
                         sectionData.getTasks().add(task);
 
                     }
