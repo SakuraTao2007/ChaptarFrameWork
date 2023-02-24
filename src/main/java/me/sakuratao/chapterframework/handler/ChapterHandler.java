@@ -39,7 +39,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
 
     public void init(){
         STATIC_INSTANCE = this;
-        File pathFile = new File(chapterFrameWork.getDataFolder().getPath() + "chapter");
+        File pathFile = new File(chapterFrameWork.getDataFolder().getPath() + "/chapter");
         if (!pathFile.exists()){
             if (pathFile.mkdirs()) {
                 chapterFrameWork.getLogger().info("|/                                                               ");
@@ -61,21 +61,21 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 for (String section : Objects.requireNonNull(chapter.getConfigurationSection("section")).getKeys(false)) {
 
                     SectionData sectionData = new SectionData();
-                    String sectionName = chapter.getString("section." + section);
-                    sectionData.setId(chapter.getInt("section." + sectionName + ".id"));
+                    String sectionName = chapter.getString("section." + section + ".name");
+                    sectionData.setId(chapter.getInt("section." + section + ".id"));
                     sectionData.setSectionName(sectionName);
                     List<TaskData> tasksList = sectionData.getTasks();
-                    for (String taskNote : chapter.getConfigurationSection("section." + sectionName + ".tasks").getKeys(false)) {
+                    for (String taskNote : chapter.getConfigurationSection("section." + section + ".tasks").getKeys(false)) {
 
                         TaskData task = new TaskData();
-                        task.setId(chapter.getInt("section." + sectionName + ".tasks." + taskNote + ".id"));
-                        task.setTaskName(chapter.getString("section." + sectionName + ".tasks." + taskNote + ".name"));
-                        task.setSetting(chapter.getStringList("section." + sectionName + ".tasks." + taskNote + "setting"));
+                        task.setId(chapter.getInt("section." + section + ".tasks." + taskNote + ".id"));
+                        task.setTaskName(chapter.getString("section." + section + ".tasks." + taskNote + ".name"));
+                        task.setSetting(chapter.getStringList("section." + section + ".tasks." + taskNote + "setting"));
                         tasksList.add(task);
 
                     }
                     chapterData.getSections().add(sectionData);
-                    chapterFrameWork.getLogger().info("| Loaded Section " + sectionName + ".");
+                    chapterFrameWork.getLogger().info("| Loaded Section " + section + ".");
 
                 }
 
@@ -149,15 +149,22 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 });
                 return;
             }
-            // TODO: 2023/2/12 更多内容的解析 
-             /*
-             if (this.chapterFrameWork.isDebugged()) {
-                Bukkit.getOnlinePlayers().forEach(p -> {
-                    if (p.hasPermission(PermissionType.COMMAND.getPermission()))
-                        p.sendMessage(translateColor("&8&| &7&o&nDebug / " + player.getName()));
+            if (segmentation.get(0).equalsIgnoreCase(ActionType.CHAT_FRAME.getType())) {
+                taskAsync(() -> {
+                    String message = segmentation.get(1);
+                    for (int i = 0; i < message.length(); i++) {
+                        long d = System.currentTimeMillis() + 1000;
+                        for (int j = 0; j < 20; j++) {
+                            player.sendRawMessage("");
+                        }
+                        player.sendMessage(message.substring(0, i));
+                        while (System.currentTimeMillis() < d) {
+                            continue;
+                        }
+                    }
                 });
+                return;
             }
-            */
         });
 
     }
