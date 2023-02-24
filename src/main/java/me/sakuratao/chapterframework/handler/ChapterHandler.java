@@ -170,27 +170,14 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 return;
             }
             if (segmentation.get(0).equalsIgnoreCase(ActionType.CHAT_FRAME.getType())) {
-                taskAsync(() -> {
-                    String message = segmentation.get(1);
-                    for (int i = 0; i < message.length(); i++) {
-                        long d = System.currentTimeMillis() + 1000;
-                        for (int j = 0; j < 20; j++) {
-                            player.sendRawMessage("");
-                        }
-                        player.sendMessage(message.substring(0, i));
-                        while (System.currentTimeMillis() < d) {
-                            continue;
-                        }
-                    }
-                });
-                return;
+                player.sendMessage(segmentation.get(1));
             }
         });
 
     }
 
     public TimeUnitType checkTimeUnit(String message) {
-        return TimeUnitType.valueOf(message.substring(0, 1).toUpperCase() + message.substring(1));
+        return TimeUnitType.valueOf(message.substring(0, 1).toUpperCase() + message.substring(1).toUpperCase());
     }
 
 }
