@@ -43,18 +43,17 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
         event.setJoinMessage("");
 
         Player player = event.getPlayer();
-        dataAccessorHandler.getDataAccessor().readPlayerDataByUUIDAsync(player.getUniqueId(), playerData -> {
-            if(playerData == null) {
+        dataAccessorHandler.getDataAccessor().readPlayerDataByPlayerNameAsync(player.getName(), playerData -> {
+            if(playerData == null) { // FIXME: 2023/2/24 playerdata 返回null
                 PlayerData playerData1 = new PlayerData(player, player.getName(), player.getUniqueId());
                 playerData1.setProgressEncode("0");
                 playerDataHandler.putPlayerData(playerData1);
                 return;
-            }
-            if (chapterFramework.isDebugged()) {
+            } else {
                 if (playerDataHandler.putPlayerData(player.getUniqueId(), playerData)) {
-                    printDebug("已创建并存储 PlayerData for " + player.getName(), false);
+                    if (chapterFramework.isDebugged()) printDebug("已创建并存储 PlayerData for " + player.getName(), false);
                 } else {
-                    printDebug("无法存储 PlayerData for " + player.getName(), true);
+                    if (chapterFramework.isDebugged()) printDebug("无法存储 PlayerData for " + player.getName(), true);
                 }
             }
         });

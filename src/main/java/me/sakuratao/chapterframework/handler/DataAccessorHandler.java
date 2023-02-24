@@ -34,10 +34,11 @@ public class DataAccessorHandler {
 
         dataAccessor = new DataAccessor() {
             @Override
-            public void readPlayerDataByUUIDAsync(UUID uuid, Consumer<PlayerData> callback) {
+            public void readPlayerDataByPlayerNameAsync(String playerName, Consumer<PlayerData> callback) {
                 ChapterFramework.STATIC_INSTANCE.taskAsync(() -> {
                     try {
-                        callback.accept(databaseAccessor.getPlayerDataDao().queryForId(uuid.toString()));
+                        System.out.println(databaseAccessor.getPlayerDataDao().queryForId(playerName));
+                        callback.accept(databaseAccessor.getPlayerDataDao().queryForId(playerName));
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -49,7 +50,9 @@ public class DataAccessorHandler {
                 ChapterFramework.STATIC_INSTANCE.taskAsync(() -> {
                     try {
                         playerData.encodeProgress();
-                        databaseAccessor.getPlayerDataDao().createOrUpdate(playerData);
+                        if (databaseAccessor.getPlayerDataDao().queryForId(playerData.getPlayer().getName()) != null){
+                            databaseAccessor.getPlayerDataDao().create(playerData);
+                        } else databaseAccessor.getPlayerDataDao().update(playerData);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
