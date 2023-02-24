@@ -39,6 +39,9 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
 
     public void init(){
         STATIC_INSTANCE = this;
+        if (new File(chapterFrameWork.getDataFolder().getPath() + "/debug").exists()) {
+            chapterFrameWork.setDebugged(true);
+        }
         File pathFile = new File(chapterFrameWork.getDataFolder().getPath() + "/chapter");
         if (!pathFile.exists()){
             if (pathFile.mkdirs()) {
@@ -64,17 +67,15 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                     String sectionName = chapter.getString("section." + section + ".name");
                     sectionData.setId(chapter.getInt("section." + section + ".id"));
                     sectionData.setSectionName(sectionName);
-                    List<TaskData> tasksList = sectionData.getTasks();
-                    for (String taskNote : chapter.getConfigurationSection("section." + section + ".tasks").getKeys(false)) {
+                    for (String taskNote : Objects.requireNonNull(chapter.getConfigurationSection("section." + section + ".tasks")).getKeys(false)) {
 
                         TaskData task = new TaskData();
                         task.setId(chapter.getInt("section." + section + ".tasks." + taskNote + ".id"));
                         task.setTaskName(chapter.getString("section." + section + ".tasks." + taskNote + ".name"));
                         task.setSetting(chapter.getStringList("section." + section + ".tasks." + taskNote + "setting"));
-                        tasksList.add(task);
+                        sectionData.getTasks().add(task);
 
                     }
-                    sectionData.setTasks(tasksList);
                     chapterData.getSections().add(sectionData);
                     chapterFrameWork.getLogger().info("| Loaded Section " + section + ".");
 
@@ -86,6 +87,16 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                             sectionData.getTasks().stream().sorted(Comparator.comparing(TaskData::getId)).toList()
                         )).sorted(Comparator.comparing(SectionData::getId)).toList()
                 );
+
+                if (chapterFrameWork.isDebugged()) {
+                    for (int i = 0; i < chapterData.getSections().size(); i++) {
+                        chapterFrameWork.getLogger().info("C: " + chapterData);
+                        chapterFrameWork.getLogger().info("S: " + chapterData.getSections().get(i));
+                        for (int j = 0; j < chapterData.getSections().get(i).getTasks().size(); j++) {
+                            chapterFrameWork.getLogger().info("T: " + chapterData.getSections().get(i).getTasks().get(j));
+                        }
+                    }
+                }
 
                 this.chapterData = chapterData;
                 chapterFrameWork.getLogger().info("| Loaded Chapter " + chapterData.getChapterName() + ".");
