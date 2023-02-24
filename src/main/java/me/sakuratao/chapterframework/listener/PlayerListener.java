@@ -83,7 +83,7 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
     @EventHandler
     public void onConditionWithMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        PlayerData playerData = playerDataHandler.getPlayerData(player);
+        PlayerData playerData = playerDataHandler.getPlayerData(player); // TODO: 2023/2/24  
         if (playerData.getConditionData() == null || playerData.getConditionData().getType() != ConditionType.MOVE) return;
         printDebug("", false);
     }
@@ -91,7 +91,7 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
     @EventHandler
     public void onConditionWithInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        PlayerData playerData = playerDataHandler.getPlayerData(player);
+        PlayerData playerData = playerDataHandler.getPlayerData(player); // TODO: 2023/2/24  
         if (playerData.getConditionData() == null || playerData.getConditionData().getType() != ConditionType.INTERACT) return;
         printDebug("", false);
     }

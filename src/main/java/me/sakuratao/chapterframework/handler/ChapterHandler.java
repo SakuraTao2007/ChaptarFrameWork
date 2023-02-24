@@ -162,10 +162,9 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                     throw new RuntimeException("出现错误 | 在章节 " + data.getChapterName() + " 中, 相关信息如下" + setting + " -/ CODE: DAECE /-");
                 }
                 String taskId = segmentation.get(1);
-                data.getSections().get(1).getTasks().forEach(t -> {
-                    if (!(Integer.getInteger(taskId).equals(t.getId()))){
-                         playerData.getProgressData().setTaskData(playerData.getProgressData().getSectionData().getTasks().get(Integer.parseInt(taskId)));
-                    }
+                playerData.getProgressData().getSectionData().getTasks().forEach(t -> {
+                    if (Integer.getInteger(taskId).equals(t.getId()))
+                        playerData.getProgressData().setTaskData(t);
                 });
                 return;
             }
