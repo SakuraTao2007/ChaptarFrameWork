@@ -69,6 +69,7 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
         getLogger().info("|                                                             ");
         getLogger().info("| We are doing some initialization...                            ");
         getLogger().info("| Data initializing...                                        ");
+        adventure = BukkitAudiences.create(this);
         cacheData = new CacheData();
         chapterHandler.init();
         dataAccessorHandler.init();

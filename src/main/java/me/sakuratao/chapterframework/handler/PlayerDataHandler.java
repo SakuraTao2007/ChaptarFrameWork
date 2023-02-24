@@ -3,6 +3,7 @@ package me.sakuratao.chapterframework.handler;
 import lombok.Getter;
 import lombok.NonNull;
 import me.sakuratao.chapterframework.data.player.PlayerData;
+import org.bukkit.block.data.type.TripwireHook;
 import org.bukkit.entity.Player;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
 import top.jingwenmc.spigotpie.common.instance.Wire;

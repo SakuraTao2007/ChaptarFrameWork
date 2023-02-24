@@ -2,7 +2,7 @@ name: ChapterFrameWork
 version: '${project.version}'
 main: me.sakuratao.chapterframework.ChapterFramework
 api-version: 1.19
-prefix: SCFW
+prefix: CFW
 load: POSTWORLD
 loadbefore: [ ProtocolLib ]
 authors: [ SakuraTao, jingwenMC ]

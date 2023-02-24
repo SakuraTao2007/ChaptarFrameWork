@@ -31,11 +31,11 @@ public class PlayerData implements MessageHelper {
     @DatabaseField(columnName = "playerUuid")
     UUID playerUuid;
 
-    Long delayTime; // 用于延迟执行
-    DelayType delayType; // 用于延迟执行
+    Long delayTime = 0L; // 用于延迟执行
+    DelayType delayType = null; // 用于延迟执行
 
     ConditionData conditionData = null;
-    ProgressData progressData;
+    ProgressData progressData = null;
 
     @DatabaseField(columnName = "progressEncode")
     String progressEncode = "";
@@ -59,7 +59,6 @@ public class PlayerData implements MessageHelper {
             return;
         }
         String[] decode = progress.split(":");
-        System.out.println(decode);
         if (decode.length != 3) {
             printDebug(player.getName() + " 的 PlayerData progress 数据存储出现错误!", true);
             printDebug("相关信息: 需要 decode 的 progress 长度小于 3", true);

@@ -55,13 +55,13 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
                 playerData.setProgressData(new ProgressData());
                 playerData.getProgressData().setChapterData(ChapterHandler.STATIC_INSTANCE.getChapterData());
                 if (playerDataHandler.putPlayerData(player.getUniqueId(), playerData)) {
-                    if (chapterFramework.isDebugged()) printDebug("已创建并存储 PlayerData for " + player.getName(), false);
+                    printDebug("已创建并存储 PlayerData for " + player.getName(), false);
                 } else {
-                    if (chapterFramework.isDebugged()) printDebug("无法存储 PlayerData for " + player.getName(), true);
+                    printDebug("无法存储 PlayerData for " + player.getName(), true);
                 }
             }
+            chapterFramework.getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player, playerData),  0, 3));
         });
-        PlayerData playerData = playerDataHandler.getPlayerData(player);
 
     }
 

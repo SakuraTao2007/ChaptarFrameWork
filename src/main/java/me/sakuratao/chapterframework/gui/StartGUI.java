@@ -5,6 +5,7 @@ import dev.triumphteam.gui.guis.GuiItem;
 import me.sakuratao.chapterframework.ChapterFramework;
 import me.sakuratao.chapterframework.handler.ConfigHandler;
 import me.sakuratao.chapterframework.handler.GuiHandler;
+import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.tasks.RegularLoopExecutionTask;
 import me.sakuratao.chapterframework.utils.helper.SchedulerHelper;
 import net.kyori.adventure.text.Component;
@@ -24,6 +25,8 @@ public class StartGUI implements SchedulerHelper { // 暂定想法用于开始�
 
     @Wire
     ChapterFramework chapterFramework;
+    @Wire
+    PlayerDataHandler playerDataHandler;
     @Wire
     GuiHandler guiHandler;
 
@@ -51,7 +54,7 @@ public class StartGUI implements SchedulerHelper { // 暂定想法用于开始�
 
 
     public void start(Player player){
-        chapterFramework.getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player),  0, 3));
+        chapterFramework.getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player, playerDataHandler.getPlayerData(player)),  0, 3));
     }
 
 }

@@ -7,10 +7,7 @@ import me.sakuratao.chapterframework.data.Chapter.SectionData;
 import me.sakuratao.chapterframework.data.Chapter.TaskData;
 import me.sakuratao.chapterframework.data.player.ConditionData;
 import me.sakuratao.chapterframework.data.player.PlayerData;
-import me.sakuratao.chapterframework.enums.ActionType;
-import me.sakuratao.chapterframework.enums.ConditionType;
-import me.sakuratao.chapterframework.enums.DelayType;
-import me.sakuratao.chapterframework.enums.PermissionType;
+import me.sakuratao.chapterframework.enums.*;
 import me.sakuratao.chapterframework.utils.helper.MessageHelper;
 import me.sakuratao.chapterframework.utils.helper.SchedulerHelper;
 import net.kyori.adventure.audience.Audience;
@@ -25,6 +22,7 @@ import top.jingwenmc.spigotpie.common.instance.Wire;
 import java.io.File;
 import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @PieComponent
 public class ChapterHandler implements MessageHelper, SchedulerHelper {
@@ -110,17 +108,27 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
 
         taskAsync(() -> {
 
-            List<String> segmentation = Arrays.stream(setting.split("")).toList();
+            List<String> segmentation = Arrays.stream(setting.split(":")).toList();
             PlayerData playerData = playerDataHandler.getPlayerData(player);
             Audience audience = this.chapterFrameWork.getAdventure().player(player);
             if (segmentation.get(0).equalsIgnoreCase(ActionType.DELAY.getType())) {
-                if (segmentation.size() != 3) {
+                if (segmentation.size() != 4) {
                     player.sendMessage(translateColor("&8&l| &c出现错误 &8~ &c数据中枢异常, 请上报错误代码至跃空研究所！ -/ CODE: DAECE /-")); // FIXME: 2023/2/18 对接 PlayerDataExpand
                     throw new RuntimeException("出现错误 | 在章节 " + data.getChapterName() + " 中, 相关信息如下" + setting + " -/ CODE: DAECE /-");
                 }
-                playerDataHandler.getPlayerData(player).setDelayTime(Long.parseLong(segmentation.get(2)) * 1000 + System.currentTimeMillis());
-                if (segmentation.get(2).equalsIgnoreCase("last")) playerDataHandler.getPlayerData(player).setDelayType(DelayType.LAST);
-                if (segmentation.get(2).equalsIgnoreCase("next")) playerDataHandler.getPlayerData(player).setDelayType(DelayType.NEXT);
+                TimeUnitType tut = checkTimeUnit(segmentation.get(1));
+                switch (tut) {
+                    case TICKS ->
+                            playerDataHandler.getPlayerData(player).setDelayTime(Long.parseLong(segmentation.get(2)) / 20 * 1000 + System.currentTimeMillis());
+                    case SECOND ->
+                            playerDataHandler.getPlayerData(player).setDelayTime(Long.parseLong(segmentation.get(2)) * 1000 + System.currentTimeMillis());
+                    case MINUTE ->
+                            playerDataHandler.getPlayerData(player).setDelayTime(Long.parseLong(segmentation.get(2)) * 60 * 1000 + System.currentTimeMillis());
+                    case HOUR ->
+                            playerDataHandler.getPlayerData(player).setDelayTime(Long.parseLong(segmentation.get(2)) * 60 * 60 * 1000 + System.currentTimeMillis());
+                }
+                if (segmentation.get(3).equalsIgnoreCase("last")) playerDataHandler.getPlayerData(player).setDelayType(DelayType.LAST);
+                if (segmentation.get(3).equalsIgnoreCase("next")) playerDataHandler.getPlayerData(player).setDelayType(DelayType.NEXT);
                 return;
             }
             if (segmentation.get(0).equalsIgnoreCase(ActionType.TITLE.getType())) {
@@ -131,7 +139,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 audience.showTitle(
                         Title.title(
                                 Component.text(segmentation.get(4)),
-                                Component.text(segmentation.size() > 5 ? segmentation.get(50) : ""),
+                                Component.text(segmentation.size() > 5 ? segmentation.get(5) : ""),
                                 Title.Times.times(
                                         Duration.ofSeconds(Long.parseLong(segmentation.get(1))),
                                         Duration.ofSeconds(Long.parseLong(segmentation.get(2))),
@@ -179,6 +187,10 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
             }
         });
 
+    }
+
+    public TimeUnitType checkTimeUnit(String message) {
+        return TimeUnitType.valueOf(message.substring(0, 1).toUpperCase() + message.substring(1));
     }
 
 }
