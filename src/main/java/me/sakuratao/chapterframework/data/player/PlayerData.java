@@ -59,6 +59,7 @@ public class PlayerData implements MessageHelper {
             return;
         }
         String[] decode = progress.split(":");
+        System.out.println(decode);
         if (decode.length != 3) {
             printDebug(player.getName() + " 的 PlayerData progress 数据存储出现错误!", true);
             printDebug("相关信息: 需要 decode 的 progress 长度小于 3", true);
@@ -68,8 +69,8 @@ public class PlayerData implements MessageHelper {
             progressData.setTaskData(progressData.sectionData.getTasks().get(0));
             return;
         }
-        progressData.setSectionData(progressData.chapterData.getSections().get(Integer.parseInt(decode[1])));
-        progressData.setTaskData(progressData.sectionData.getTasks().get(Integer.parseInt(decode[2])));
+        progressData.setSectionData(progressData.chapterData.getSections().get(Integer.parseInt(decode[1])-1));
+        progressData.setTaskData(progressData.sectionData.getTasks().get(Integer.parseInt(decode[2])-1));
     }
 
     public void encodeProgress() {

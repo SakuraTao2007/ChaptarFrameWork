@@ -7,6 +7,7 @@ import me.sakuratao.chapterframework.data.Chapter.ChapterData;
 import me.sakuratao.chapterframework.data.DataAccessor;
 import me.sakuratao.chapterframework.data.player.PlayerData;
 import me.sakuratao.chapterframework.data.storage.DatabaseAccessor;
+import me.sakuratao.chapterframework.utils.helper.MessageHelper;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
 import top.jingwenmc.spigotpie.common.instance.Wire;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 @PieComponent
-public class DataAccessorHandler {
+public class DataAccessorHandler implements MessageHelper {
 
     @Wire
     DatabaseAccessor databaseAccessor;
@@ -49,9 +50,10 @@ public class DataAccessorHandler {
                 ChapterFramework.STATIC_INSTANCE.taskAsync(() -> {
                     try {
                         playerData.encodeProgress();
-                        if (databaseAccessor.getPlayerDataDao().queryForId(playerData.getPlayer().getName()) == null){
+                        if (databaseAccessor.getPlayerDataDao().queryForId(playerData.getPlayerName()) == null){
                             databaseAccessor.getPlayerDataDao().create(playerData);
                         } else databaseAccessor.getPlayerDataDao().update(playerData);
+                        printDebug("已存储 PlayerData for " + playerData.getPlayerName() + "", false);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

@@ -3,8 +3,10 @@ package me.sakuratao.chapterframework.listener;
 import me.sakuratao.chapterframework.ChapterFramework;
 import me.sakuratao.chapterframework.data.cache.CacheData;
 import me.sakuratao.chapterframework.data.player.PlayerData;
+import me.sakuratao.chapterframework.data.player.ProgressData;
 import me.sakuratao.chapterframework.enums.ConditionType;
 import me.sakuratao.chapterframework.enums.PermissionType;
+import me.sakuratao.chapterframework.handler.ChapterHandler;
 import me.sakuratao.chapterframework.handler.DataAccessorHandler;
 import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.tasks.RegularLoopExecutionTask;
@@ -50,6 +52,8 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
                 playerDataHandler.putPlayerData(playerData1);
                 return;
             } else {
+                playerData.setProgressData(new ProgressData());
+                playerData.getProgressData().setChapterData(ChapterHandler.STATIC_INSTANCE.getChapterData());
                 if (playerDataHandler.putPlayerData(player.getUniqueId(), playerData)) {
                     if (chapterFramework.isDebugged()) printDebug("已创建并存储 PlayerData for " + player.getName(), false);
                 } else {
