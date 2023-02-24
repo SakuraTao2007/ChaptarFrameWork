@@ -5,12 +5,28 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import me.sakuratao.chapterframework.ChapterFramework;
+import me.sakuratao.chapterframework.enums.PermissionType;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
 
 public interface MessageHelper {
 
+    /**
+     *  用于打印debug信息
+     * @param debugMessage - 需要输出的信息
+     * @param error - 是否为错误信息
+     */
+    default void printDebug(String debugMessage, boolean error) {
+        if (ChapterFramework.STATIC_INSTANCE.isDebugged()) {
+            Bukkit.getOnlinePlayers().forEach(p -> {
+                if (!p.hasPermission(PermissionType.COMMAND.getPermission())) return;
+                if (error) p.sendMessage(translateColor("&8&| &7&o&nDebug / &c&o&n" + debugMessage));
+                else p.sendMessage(translateColor("&8&| &7&o&nDebug / &7&o&n" + debugMessage));
+            });
+        }
+    }
     /**
      *
      * @param string - 需要染色的文本

@@ -30,9 +30,10 @@ public class PlayerData implements MessageHelper {
     @DatabaseField(columnName = "playerUuid")
     UUID playerUuid;
 
-    Long delayTime;
-    DelayType delayType;
+    Long delayTime; // 用于延迟执行
+    DelayType delayType; // 用于延迟执行
 
+    ConditionData conditionData = null;
     ProgressData progressData;
 
     @DatabaseField(columnName = "progressEncode")
@@ -49,15 +50,9 @@ public class PlayerData implements MessageHelper {
     public void decodeProgress(@NonNull String progress) {
         String[] decode = progress.split(":");
         if (decode.length != 3) {
-            if (ChapterFramework.STATIC_INSTANCE.isDebugged()) {
-                Bukkit.getOnlinePlayers().forEach(p -> {
-                    if (p.hasPermission(PermissionType.COMMAND.getPermission())) {
-                        p.sendMessage(translateColor("&8&| &7&o&nDebug / &c&o&n" + player.getName() + " 的 PlayerData progress 数据存储出现错误!"));
-                        p.sendMessage(translateColor("&8&| &7&o&nDebug / &c&o&n相关信息: 需要 decode 的 progress 长度小于 3"));
-                    }
-                });
-                throw new RuntimeException("需要 decode 的 progress 长度小于 3");
-            }
+            printDebug(player.getName() + " 的 PlayerData progress 数据存储出现错误!", true);
+            printDebug("相关信息: 需要 decode 的 progress 长度小于 3", true);
+            throw new RuntimeException("需要 decode 的 progress 长度小于 3");
         }
         if (!decode[0].equalsIgnoreCase(progressData.chapterData.getChapterName())){ // 用于判断章节是否发生变化
             progressData.setSectionData(progressData.chapterData.getSections().get(1));

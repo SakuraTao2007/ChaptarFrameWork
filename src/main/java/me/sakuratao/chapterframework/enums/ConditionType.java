@@ -12,7 +12,7 @@ public enum ConditionType {
         this.condition = condition;
     }
 
-    public String getUnit() {
+    public String getType() {
         return condition;
     }
 
