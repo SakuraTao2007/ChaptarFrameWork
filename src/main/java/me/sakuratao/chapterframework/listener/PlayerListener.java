@@ -68,8 +68,10 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
         event.setQuitMessage("");
 
         Player player = event.getPlayer();
-        chapterFramework.getCacheData().getBukkitTaskMap().get(event.getPlayer()).cancel();
-        chapterFramework.getCacheData().getBukkitTaskMap().remove(player);
+        if (chapterFramework.getCacheData().getBukkitTaskMap().containsKey(event.getPlayer())) {
+            chapterFramework.getCacheData().getBukkitTaskMap().get(event.getPlayer()).cancel();
+            chapterFramework.getCacheData().getBukkitTaskMap().remove(player);
+        }
         dataAccessorHandler.getDataAccessor().savePlayerDataAsync(playerDataHandler.getPlayerData(player));
         playerDataHandler.removePlayerData(player);
 
