@@ -46,7 +46,7 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
 
         Player player = event.getPlayer();
         dataAccessorHandler.getDataAccessor().readPlayerDataByPlayerNameAsync(player.getName(), playerData -> {
-            if(playerData == null) { // FIXME: 2023/2/24 playerdata 返回null
+            if(playerData == null) { // FIXME: 2023/2/24 playerdata 返回 null
                 PlayerData playerData1 = new PlayerData(player, player.getName(), player.getUniqueId());
                 playerData1.setProgressEncode("0");
                 playerDataHandler.putPlayerData(playerData1);
@@ -60,7 +60,6 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
                     printDebug("无法存储 PlayerData for " + player.getName(), true);
                 }
             }
-            chapterFramework.getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player, playerData),  0, 3));
         });
 
     }
