@@ -45,13 +45,6 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
 
     @Override
     public void onEnable() {
-        getLogger().info("| Checking environment...");
-        if (NMSUtil.isSupported()) getLogger().info("| Bukkit : " + Bukkit.getBukkitVersion());
-        else {getLogger().info("| UNSUPPORTED BUKKIT!"); return;}
-        if (Integer.parseInt(System.getProperty("java.specification.version")) >= 17) getLogger().info("| Java: " + System.getProperty("java.specification.version"));
-        else {getLogger().info("| UNSUPPORTED JAVA VERSION!"); return;}
-        getLogger().info("| Passed, the environment is fine!                          ");
-        getLogger().info("|                                                             ");
         getLogger().info("| Hi, THERE! WELCOME BACK AGAIN~                              ");
         getLogger().info("|                                                             ");
         getLogger().info("| _________ .__                   __                          ");
@@ -59,7 +52,14 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
         getLogger().info("| /    \\  \\/|  |  \\\\__  \\ \\____ \\   __\\/ __ \\_  __ \\");
         getLogger().info("| \\     \\___|   Y  \\/ __ \\|  |_> >  | \\  ___/|  | \\/    ");
         getLogger().info("|  \\______  /___|  (____  /   __/|__|  \\___  >__|           ");
-        getLogger().info("|         \\/     \\/     \\/|__|             \\/             ");
+        getLogger().info("|         \\/     \\/     \\/|__|             \\/  Ver: " + getDescription().getVersion());
+        getLogger().info("|                                                             ");
+        getLogger().info("| Checking environment...");
+        if (NMSUtil.isSupported()) getLogger().info("| Bukkit : " + Bukkit.getBukkitVersion());
+        else {getLogger().info("| UNSUPPORTED BUKKIT!"); return;}
+        if (Integer.parseInt(System.getProperty("java.specification.version")) >= 17) getLogger().info("| Java: " + System.getProperty("java.specification.version"));
+        else {getLogger().info("| UNSUPPORTED JAVA VERSION!"); return;}
+        getLogger().info("| Passed, the environment is fine!                          ");
         getLogger().info("|                                                             ");
         getLogger().info("| Now we are loading SpigotPie...                             ");
         getLogger().info("|                                                             ");
