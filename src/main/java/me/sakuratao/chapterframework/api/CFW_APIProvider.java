@@ -2,6 +2,7 @@ package me.sakuratao.chapterframework.api;
 
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
+import me.sakuratao.chapterframework.data.Chapter.ChapterData;
 
 @UtilityClass
 public class CFW_APIProvider {

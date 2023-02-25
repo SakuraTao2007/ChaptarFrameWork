@@ -9,14 +9,17 @@ import me.sakuratao.chapterframework.api.CFW_API;
 import me.sakuratao.chapterframework.api.CFW_APIProvider;
 import me.sakuratao.chapterframework.data.Chapter.ChapterData;
 import me.sakuratao.chapterframework.data.cache.CacheData;
+import me.sakuratao.chapterframework.data.player.PlayerData;
 import me.sakuratao.chapterframework.handler.ChapterHandler;
 import me.sakuratao.chapterframework.handler.ConfigHandler;
 import me.sakuratao.chapterframework.handler.DataAccessorHandler;
+import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.tasks.DataSaveLoopTask;
 import me.sakuratao.chapterframework.utils.NMSUtil;
 import me.sakuratao.chapterframework.utils.helper.SchedulerHelper;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
 import top.jingwenmc.spigotpie.common.instance.Wire;
@@ -37,6 +40,8 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
 
     @Wire
     ChapterHandler chapterHandler;
+    @Wire
+    PlayerDataHandler playerDataHandler;
     @Wire
     DataAccessorHandler dataAccessorHandler;
 
@@ -87,7 +92,7 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
             protocolManager = ProtocolLibrary.getProtocolManager();
             getLogger().info("| -/H/- ProtocolLib Hooked.                                        ");
         }
-        CFW_APIProvider.setCFW_API(() -> chapterHandler.getChapterData());
+        CFW_APIProvider.setCFW_API(player -> playerDataHandler.getPlayerData(player));
         getLogger().info("| API Setup.                                                   ");
     }
 
