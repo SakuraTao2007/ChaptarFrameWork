@@ -46,7 +46,7 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
 
         Player player = event.getPlayer();
         dataAccessorHandler.getDataAccessor().readPlayerDataByPlayerNameAsync(player.getName(), playerData -> {
-            if(playerData == null) { // FIXME: 2023/2/24 playerdata 返回 null
+            if(playerData == null) {
                 PlayerData playerData1 = new PlayerData(player, player.getName(), player.getUniqueId());
                 playerData1.setProgressEncode("0");
                 playerDataHandler.putPlayerData(playerData1);
