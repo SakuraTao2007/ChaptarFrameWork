@@ -60,9 +60,9 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
         getLogger().info(" |         \\/     \\/     \\/|__|             \\/  Ver: " + getDescription().getVersion());
         getLogger().info(" |                                                             ");
         getLogger().info(" | Checking environment...");
-        if (NMSUtil.isSupported()) getLogger().info("| Bukkit : " + Bukkit.getBukkitVersion());
+        if (NMSUtil.isSupported()) getLogger().info(" | Bukkit: " + Bukkit.getVersion());
         else {getLogger().info(" | UNSUPPORTED BUKKIT!"); return;}
-        if (Integer.parseInt(System.getProperty("java.specification.version")) >= 17) getLogger().info("| Java: " + System.getProperty("java.specification.version"));
+        if (Integer.parseInt(System.getProperty("java.specification.version")) >= 17) getLogger().info(" | Java: " + System.getProperty("java.specification.version"));
         else {getLogger().info(" | UNSUPPORTED JAVA VERSION!"); return;}
         getLogger().info(" | Passed, the environment is fine!                          ");
         getLogger().info(" |                                                             ");

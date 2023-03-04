@@ -24,9 +24,7 @@ public class NMSUtil {
 
     public static boolean isSupported(){
         String[] split = version.split("_");
-        if (Integer.parseInt(split[1]) < 19)
-            return false;
-        return version.startsWith("v1_19_R2");
+        return Integer.parseInt(split[1]) >= 19;
     }
 
 }

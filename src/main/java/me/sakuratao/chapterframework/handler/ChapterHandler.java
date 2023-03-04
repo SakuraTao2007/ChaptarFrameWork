@@ -43,10 +43,10 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
         File pathFile = new File(chapterFrameWork.getDataFolder().getPath() + "/chapter");
         if (!pathFile.exists()){
             if (pathFile.mkdirs()) {
-                chapterFrameWork.getLogger().info("|/                                                               ");
-                chapterFrameWork.getLogger().info("|\\                        DEFAULT FOLDER NOT FOUND                  ");
-                chapterFrameWork.getLogger().info("|/                               WE RESPAWN IT                         ");
-                chapterFrameWork.getLogger().info("|\\                                                              ");
+                chapterFrameWork.getLogger().info(" |                                                               ");
+                chapterFrameWork.getLogger().info(" |                        DEFAULT FOLDER NOT FOUND                  ");
+                chapterFrameWork.getLogger().info(" |                               WE RESPAWN IT                         ");
+                chapterFrameWork.getLogger().info(" |                                                              ");
             }
         } else {
             for (File file : Objects.requireNonNull(pathFile.listFiles())) {
@@ -57,7 +57,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 chapterData.setChapterName(chapter.getString("chapter_name"));
                 chapterData.setChapterVersion(chapter.getString("version"));
 
-                chapterFrameWork.getLogger().info("| Loading Chapter " + chapterData.getChapterName() + " / Ver: " + chapterData.getChapterVersion() + "...");
+                chapterFrameWork.getLogger().info(" | Loading Chapter " + chapterData.getChapterName() + " / Ver: " + chapterData.getChapterVersion() + "...");
 
                 for (String section : Objects.requireNonNull(chapter.getConfigurationSection("section")).getKeys(false)) {
 
@@ -75,7 +75,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
 
                     }
                     chapterData.getSections().add(sectionData);
-                    chapterFrameWork.getLogger().info("| Loaded Section " + section + ".");
+                    chapterFrameWork.getLogger().info(" | Loaded Section " + section + ".");
 
                 }
 
@@ -87,17 +87,17 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 );
 
                 if (chapterFrameWork.isDebugged()) {
+                    chapterFrameWork.getLogger().info("C: " + chapterData.getChapterName());
                     for (int i = 0; i < chapterData.getSections().size(); i++) {
-                        chapterFrameWork.getLogger().info("C: " + chapterData);
-                        chapterFrameWork.getLogger().info("S: " + chapterData.getSections().get(i));
+                        chapterFrameWork.getLogger().info("S: ID - " + chapterData.getSections().get(i).getId() + " Loaded");
                         for (int j = 0; j < chapterData.getSections().get(i).getTasks().size(); j++) {
-                            chapterFrameWork.getLogger().info("T: " + chapterData.getSections().get(i).getTasks().get(j));
+                            chapterFrameWork.getLogger().info("T: ID - " + chapterData.getSections().get(i).getTasks().get(j).getId() + " Loaded");
                         }
                     }
                 }
 
                 this.chapterData = chapterData;
-                chapterFrameWork.getLogger().info("| Loaded Chapter " + chapterData.getChapterName() + ".");
+                chapterFrameWork.getLogger().info(" | Loaded Chapter " + chapterData.getChapterName() + ".");
 
             }
         }
