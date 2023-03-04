@@ -50,50 +50,55 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
 
     @Override
     public void onEnable() {
-        getLogger().info("| Hi, THERE! WELCOME BACK AGAIN~                              ");
-        getLogger().info("|                                                             ");
-        getLogger().info("| _________ .__                   __                          ");
-        getLogger().info("| \\_   ___ \\|  |__ _____  _______/  |_  ___________         ");
-        getLogger().info("| /    \\  \\/|  |  \\\\__  \\ \\____ \\   __\\/ __ \\_  __ \\");
-        getLogger().info("| \\     \\___|   Y  \\/ __ \\|  |_> >  | \\  ___/|  | \\/    ");
-        getLogger().info("|  \\______  /___|  (____  /   __/|__|  \\___  >__|           ");
-        getLogger().info("|         \\/     \\/     \\/|__|             \\/  Ver: " + getDescription().getVersion());
-        getLogger().info("|                                                             ");
-        getLogger().info("| Checking environment...");
+        getLogger().info(" | Hi, THERE! WELCOME BACK AGAIN~                              ");
+        getLogger().info(" |                                                             ");
+        getLogger().info(" | _________ .__                   __                          ");
+        getLogger().info(" | \\_   ___ \\|  |__ _____  _______/  |_  ___________         ");
+        getLogger().info(" | /    \\  \\/|  |  \\\\__  \\ \\____ \\   __\\/ __ \\_  __ \\");
+        getLogger().info(" | \\     \\___|   Y  \\/ __ \\|  |_> >  | \\  ___/|  | \\/    ");
+        getLogger().info(" |  \\______  /___|  (____  /   __/|__|  \\___  >__|           ");
+        getLogger().info(" |         \\/     \\/     \\/|__|             \\/  Ver: " + getDescription().getVersion());
+        getLogger().info(" |                                                             ");
+        getLogger().info(" | Checking environment...");
         if (NMSUtil.isSupported()) getLogger().info("| Bukkit : " + Bukkit.getBukkitVersion());
-        else {getLogger().info("| UNSUPPORTED BUKKIT!"); return;}
+        else {getLogger().info(" | UNSUPPORTED BUKKIT!"); return;}
         if (Integer.parseInt(System.getProperty("java.specification.version")) >= 17) getLogger().info("| Java: " + System.getProperty("java.specification.version"));
-        else {getLogger().info("| UNSUPPORTED JAVA VERSION!"); return;}
-        getLogger().info("| Passed, the environment is fine!                          ");
-        getLogger().info("|                                                             ");
-        getLogger().info("| Now we are loading SpigotPie...                             ");
-        getLogger().info("|                                                             ");
+        else {getLogger().info(" | UNSUPPORTED JAVA VERSION!"); return;}
+        getLogger().info(" | Passed, the environment is fine!                          ");
+        getLogger().info(" |                                                             ");
+        getLogger().info(" | Now we are loading SpigotPie...                             ");
+        getLogger().info(" |                                                             ");
         SpigotPieSpigot.inject(this,"META-INF", "org", "com", "dev", "net", "org");
-        getLogger().info("|                                                             ");
-        getLogger().info("| Loaded SpigotPie.                                            ");
-        getLogger().info("|                                                             ");
-        getLogger().info("| We are doing some initialization...                            ");
-        getLogger().info("| Data initializing...                                        ");
+        getLogger().info(" |                                                             ");
+        getLogger().info(" | Loaded SpigotPie.                                            ");
+        getLogger().info(" |                                                             ");
+        getLogger().info(" | We are doing some initialization...                            ");
+        getLogger().info(" | Data initializing...                                        ");
         adventure = BukkitAudiences.create(this);
         cacheData = new CacheData();
         chapterHandler.init();
         dataAccessorHandler.init();
-        getLogger().info("| Data initialized.                                            ");
+        getLogger().info(" | Data initialized.                                            ");
         if (ConfigHandler.AUTO_SAVE_DATA){
             taskTimerAsync(new DataSaveLoopTask(), 0, (long) ConfigHandler.AUTO_SAVE_TIME * 60 * 20);
         }
-        getLogger().info("| Checking hooks...                                            ");
+        getLogger().info(" | Checking hooks...                                            ");
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
             cacheData.setPAPI(true);
-            getLogger().info("| -/H/- Papi Hooked.                                        ");
+            getLogger().info(" | + Papi Hooked.                                        ");
         }
         if (getServer().getPluginManager().isPluginEnabled("ProtocolLib")) {
             cacheData.setPROTOCOL_LIB(true);
             protocolManager = ProtocolLibrary.getProtocolManager();
-            getLogger().info("| -/H/- ProtocolLib Hooked.                                        ");
+            getLogger().info(" | + ProtocolLib Hooked.                                        ");
+        }
+        if (getServer().getPluginManager().isPluginEnabled("Citizens")) {
+            cacheData.setCITIZENS(true);
+            protocolManager = ProtocolLibrary.getProtocolManager();
+            getLogger().info(" | + Citizens Hooked.                                        ");
         }
         CFW_APIProvider.setCFW_API(player -> playerDataHandler.getPlayerData(player));
-        getLogger().info("| API Setup.                                                   ");
+        getLogger().info(" | API Setup.                                                   ");
     }
 
     @Override

@@ -47,14 +47,19 @@ public class StartGUI implements SchedulerHelper { // 暂定想法用于开始�
                 player,
                 ConfigHandler.STARTGUI_TITLE,
                 ConfigHandler.STARTGUI_ROWS,
-                ConfigHandler.STARTGUI_ITEMS.stream().collect(Collectors.toMap((k -> Integer.parseInt(k.split(":")[0])), v -> apply(player, v)))
+                ConfigHandler.STARTGUI_ITEMS.stream().collect(
+                        Collectors.toMap(
+                                k -> Integer.parseInt(k.split(":")[0]),
+                                v -> apply(player, v)
+                        )
+                )
         );
 
     }
 
 
     public void start(Player player){
-        chapterFramework.getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player, playerDataHandler.getPlayerData(player)),  0, 3));
+        chapterFramework.getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player, playerDataHandler.getPlayerData(player)),  0, 5));
     }
 
 }

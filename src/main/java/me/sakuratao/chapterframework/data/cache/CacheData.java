@@ -17,5 +17,6 @@ public class CacheData {
 
     boolean PAPI = false;
     boolean PROTOCOL_LIB = false;
+    boolean CITIZENS = false;
 
 }

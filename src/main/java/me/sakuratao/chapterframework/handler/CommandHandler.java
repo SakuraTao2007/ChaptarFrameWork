@@ -1,6 +1,7 @@
 package me.sakuratao.chapterframework.handler;
 
 import me.sakuratao.chapterframework.ChapterFramework;
+import me.sakuratao.chapterframework.enums.PermissionType;
 import me.sakuratao.chapterframework.utils.CCUtil;
 import me.sakuratao.chapterframework.utils.helper.MessageHelper;
 import me.sakuratao.chapterframework.utils.helper.SchedulerHelper;
@@ -16,14 +17,16 @@ public class CommandHandler implements SchedulerHelper, MessageHelper {
     @Wire
     ChapterFramework chapterFrameWork;
 
-    @PieCommand(value = "chapter", permission = "cfw.command", bungeeCord = false, spigot = true)
+    @PieCommand(value = "cfw help", permission = "cfw.command", bungeeCord = false, spigot = true)
     public void mainCommand(CommandSender sender){
         sender.sendMessage(CCUtil.translate("&8&m---»--*-------------------------------------*--«---"));
         sender.sendMessage(CCUtil.translate("&r"));
         sender.sendMessage(CCUtil.translate("&r  &f&lChapterFrameWork &8| &fVer: &7" + chapterFrameWork.getDescription().getVersion()));
         sender.sendMessage(CCUtil.translate("&r  &fAuthor: &7" + chapterFrameWork.getDescription().getAuthors()));
         sender.sendMessage(CCUtil.translate("&r"));
-        sender.sendMessage(CCUtil.translate("&r   &7* &f/chapter &8| &f查看故事章节指令集"));
+        sender.sendMessage(CCUtil.translate("&r   &7* &f/cfw help &8| &f查看帮助"));
+        if (sender.hasPermission(PermissionType.DEBUG.getPermission())) sender.sendMessage(CCUtil.translate("&r   &7* &f/cfw debug &8| &f开启调试模式"));
+        sender.sendMessage(CCUtil.translate("&r   &7* &f/cfw chapter &8| &f查看故事章节指令集"));
         sender.sendMessage(CCUtil.translate("&r"));
         sender.sendMessage(CCUtil.translate("&8&m---»--*-------------------------------------*--«---"));
     }
