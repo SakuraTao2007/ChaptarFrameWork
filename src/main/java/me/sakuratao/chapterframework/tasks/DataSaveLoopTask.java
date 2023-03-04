@@ -1,6 +1,6 @@
 package me.sakuratao.chapterframework.tasks;
 
-import me.sakuratao.chapterframework.handler.DataAccessorHandler;
+import me.sakuratao.chapterframework.handler.storage.DataAccessorHandler;
 import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.utils.helper.MessageHelper;
 

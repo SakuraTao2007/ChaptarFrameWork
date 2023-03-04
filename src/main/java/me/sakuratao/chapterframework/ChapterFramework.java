@@ -8,7 +8,7 @@ import me.sakuratao.chapterframework.api.CFW_APIProvider;
 import me.sakuratao.chapterframework.data.cache.CacheData;
 import me.sakuratao.chapterframework.handler.ChapterHandler;
 import me.sakuratao.chapterframework.handler.ConfigHandler;
-import me.sakuratao.chapterframework.handler.DataAccessorHandler;
+import me.sakuratao.chapterframework.handler.storage.DataAccessorHandler;
 import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.tasks.DataSaveLoopTask;
 import me.sakuratao.chapterframework.utils.NMSUtil;

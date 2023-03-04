@@ -1,4 +1,4 @@
-package me.sakuratao.chapterframework.data;
+package me.sakuratao.chapterframework.handler.storage;
 
 import me.sakuratao.chapterframework.data.player.PlayerData;
 

@@ -1,9 +1,9 @@
-package me.sakuratao.chapterframework.handler;
+package me.sakuratao.chapterframework.handler.storage;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
 import me.sakuratao.chapterframework.ChapterFramework;
-import me.sakuratao.chapterframework.data.DataAccessor;
+import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.data.player.PlayerData;
 import me.sakuratao.chapterframework.data.storage.DatabaseAccessor;
 import me.sakuratao.chapterframework.utils.helper.MessageHelper;
