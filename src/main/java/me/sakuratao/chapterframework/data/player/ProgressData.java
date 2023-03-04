@@ -2,9 +2,9 @@ package me.sakuratao.chapterframework.data.player;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import me.sakuratao.chapterframework.data.Chapter.ChapterData;
-import me.sakuratao.chapterframework.data.Chapter.SectionData;
-import me.sakuratao.chapterframework.data.Chapter.TaskData;
+import me.sakuratao.chapterframework.data.chapter.ChapterData;
+import me.sakuratao.chapterframework.data.chapter.SectionData;
+import me.sakuratao.chapterframework.data.chapter.TaskData;
 
 @Data
 @NoArgsConstructor

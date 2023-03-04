@@ -1,4 +1,4 @@
-package me.sakuratao.chapterframework.data.Chapter;
+package me.sakuratao.chapterframework.data.chapter;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

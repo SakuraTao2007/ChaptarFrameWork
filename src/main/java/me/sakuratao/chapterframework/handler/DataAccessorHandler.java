@@ -3,7 +3,6 @@ package me.sakuratao.chapterframework.handler;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import me.sakuratao.chapterframework.ChapterFramework;
-import me.sakuratao.chapterframework.data.Chapter.ChapterData;
 import me.sakuratao.chapterframework.data.DataAccessor;
 import me.sakuratao.chapterframework.data.player.PlayerData;
 import me.sakuratao.chapterframework.data.storage.DatabaseAccessor;
@@ -12,7 +11,6 @@ import top.jingwenmc.spigotpie.common.instance.PieComponent;
 import top.jingwenmc.spigotpie.common.instance.Wire;
 
 import java.sql.SQLException;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 @PieComponent
