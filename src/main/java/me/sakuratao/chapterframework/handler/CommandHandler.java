@@ -34,15 +34,11 @@ public class CommandHandler implements SchedulerHelper, MessageHelper {
     @PieCommand(value = "cfw debug", permission = "cfw.debug", bungeeCord = false, spigot = true)
     public void debugCommand(CommandSender sender){
         if (chapterFrameWork.isDebugged()) {
-            Bukkit.getOnlinePlayers().forEach( p -> {
-                p.sendMessage(translateColor("&8&l| &7&o&nDebug &8~ &7&o&n已关闭 Debug 模式. <关闭者: " + sender.getName() + ">"));
-            });
+            Bukkit.getOnlinePlayers().forEach( p -> p.sendMessage(translateColor("&8&l| &7&o&nDebug &8~ &7&o&n已关闭 Debug 模式. <关闭者: " + sender.getName() + ">")));
             chapterFrameWork.getLogger().info(translateColor("| Debug ~ 已关闭 Debug 模式. <关闭者: " + sender.getName() + ">"));
             chapterFrameWork.setDebugged(false);
         } else {
-            Bukkit.getOnlinePlayers().forEach( p -> {
-                p.sendMessage(translateColor("&8&l| &7&o&nDebug &8~ &7&o&n已开启 Debug 模式, Debug 内容将斜体并附加下划线显示 <开启者: " + sender.getName() + ">"));
-            });
+            Bukkit.getOnlinePlayers().forEach( p -> p.sendMessage(translateColor("&8&l| &7&o&nDebug &8~ &7&o&n已开启 Debug 模式, Debug 内容将斜体并附加下划线显示 <开启者: " + sender.getName() + ">")));
             chapterFrameWork.getLogger().info(translateColor("| Debug ~ 已开启 Debug 模式, Debug 内容将斜体并附加下划线显示 <开启者: " + sender.getName() + ">"));
             chapterFrameWork.setDebugged(true);
         }

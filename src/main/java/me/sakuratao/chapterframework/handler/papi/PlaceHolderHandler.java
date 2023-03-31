@@ -35,7 +35,7 @@ public class PlaceHolderHandler extends PlaceholderExpansion {
         return switch (params) {
             case "version" -> chapterFramework.getDescription().getVersion();
             case "name" -> chapterFramework.getDescription().getName();
-            default -> null;
+            default -> "null";
         };
 
     }

@@ -6,7 +6,7 @@
 
     <groupId>me.sakuratao</groupId>
     <artifactId>CFW</artifactId>
-    <version>Preview-1.0.3.4</version>
+    <version>Preview-1.0.3</version>
     <packaging>jar</packaging>
 
     <name>ChapterFrameWork</name>
