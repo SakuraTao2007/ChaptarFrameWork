@@ -12,6 +12,7 @@ public class ChapterData {
 
     String chapterName = "";
     String chapterVersion = "";
+    int id = 1;
     List<SectionData> sections = new ArrayList<>();
 
 }

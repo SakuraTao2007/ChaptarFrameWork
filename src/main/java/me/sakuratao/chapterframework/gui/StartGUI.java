@@ -5,6 +5,7 @@ import dev.triumphteam.gui.guis.GuiItem;
 import me.sakuratao.chapterframework.ChapterFramework;
 import me.sakuratao.chapterframework.handler.ConfigHandler;
 import me.sakuratao.chapterframework.handler.GuiHandler;
+import me.sakuratao.chapterframework.handler.GuiHandler;
 import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.tasks.RegularLoopExecutionTask;
 import me.sakuratao.chapterframework.utils.helper.SchedulerHelper;
@@ -32,10 +33,11 @@ public class StartGUI implements SchedulerHelper { // 暂定想法用于开始�
 
     private GuiItem apply(Player p, String v) {
         String[] split = v.split(":");
-        List<Component> lore = Arrays.stream(split[3].split("<l>")).map(Component::text).collect(Collectors.toList());
-        return ItemBuilder.from(Objects.requireNonNull(Material.getMaterial(split[1]))).amount(Integer.parseInt(split[2])).lore(lore).asGuiItem(event -> {
+        String itemName = split[3];
+        List<Component> lore = Arrays.stream(split[4].split("<l>")).map(Component::text).collect(Collectors.toList());
+        return ItemBuilder.from(Objects.requireNonNull(Material.getMaterial(split[1]))).name(Component.text(itemName)).amount(Integer.parseInt(split[2])).lore(lore).asGuiItem(event -> {
             event.setCancelled(true);
-            if (split[4] != null  && split[4].equals("CONFIRM")){
+            if (split[5] != null && split[5].equals("CONFIRM")){
                 start(p);
             }
         }); // TODO: 2023/2/18 附魔添加
@@ -45,9 +47,9 @@ public class StartGUI implements SchedulerHelper { // 暂定想法用于开始�
 
         guiHandler.makeGuiAndOpen(
                 player,
-                ConfigHandler.STARTGUI_TITLE,
-                ConfigHandler.STARTGUI_ROWS,
-                ConfigHandler.STARTGUI_ITEMS.stream().collect(
+                GuiHandler.STARTGUI_TITLE,
+                GuiHandler.STARTGUI_ROWS,
+                GuiHandler.STARTGUI_ITEMS.stream().collect(
                         Collectors.toMap(
                                 k -> Integer.parseInt(k.split(":")[0]),
                                 v -> apply(player, v)
@@ -59,7 +61,7 @@ public class StartGUI implements SchedulerHelper { // 暂定想法用于开始�
 
 
     public void start(Player player){
-        chapterFramework.getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player, playerDataHandler.getPlayerData(player)),  0, 5));
+        chapterFramework.getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player, playerDataHandler.getPlayerData(player)),  0, ConfigHandler.LOOP_INTERVAL));
     }
 
 }

@@ -45,11 +45,11 @@ public class PlayerData implements MessageHelper {
         this.playerName = playerName;
         this.playerUuid = playerUuid;
         progressData = new ProgressData();
-        progressData.chapterData = ChapterHandler.STATIC_INSTANCE.getChapterData();
     }
 
     public void decodeProgress(@NotNull String progress) {
         if (progress.equalsIgnoreCase("0")) {
+            progressData.chapterData = ChapterHandler.STATIC_INSTANCE.getChapterDataList().get(Integer.parseInt(progressEncode.split(":")[0]));
             progressData.setSectionData(progressData.chapterData.getSections().get(0));
             progressData.setTaskData(progressData.sectionData.getTasks().get(0));
             printDebug("初始化玩家 " + player.getName() + "剧情数据", false);
@@ -63,11 +63,15 @@ public class PlayerData implements MessageHelper {
             printDebug(player.getName() + " 的 PlayerData progress 数据存储出现错误!", true);
             printDebug("相关信息: 需要 decode 的 progress 长度小于 3", true);
         }
-        if (!decode[0].equalsIgnoreCase(progressData.chapterData.getChapterName())){ // 用于判断章节是否发生变化
+        /*if (!decode[0].equalsIgnoreCase(progressData.chapterData.getId() + "")){ // 用于判断章节是否发生变化
+            progressData.chapterData = ChapterHandler.STATIC_INSTANCE.getChapterDataList().get(Integer.parseInt(progressEncode.split(":")[0]));
             progressData.setSectionData(progressData.chapterData.getSections().get(0));
             progressData.setTaskData(progressData.sectionData.getTasks().get(0));
             return;
         }
+
+         */
+        progressData.chapterData = ChapterHandler.STATIC_INSTANCE.getChapterDataList().get(Integer.parseInt(decode[0])-1);
         progressData.setSectionData(progressData.chapterData.getSections().get(Integer.parseInt(decode[1])-1));
         progressData.setTaskData(progressData.sectionData.getTasks().get(Integer.parseInt(decode[2])-1));
     }

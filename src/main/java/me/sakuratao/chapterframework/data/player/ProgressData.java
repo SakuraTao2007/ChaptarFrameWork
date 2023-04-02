@@ -16,7 +16,7 @@ public class ProgressData {
 
     @Override
     public String toString(){
-        return chapterData.getChapterName() + ":" + sectionData.getId() + ":" + taskData.getId();
+        return chapterData.getId() + ":" + sectionData.getId() + ":" + taskData.getId();
     }
 
 }

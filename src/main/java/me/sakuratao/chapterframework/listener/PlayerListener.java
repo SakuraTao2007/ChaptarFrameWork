@@ -49,7 +49,7 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
                 return;
             } else {
                 playerData.setProgressData(new ProgressData());
-                playerData.getProgressData().setChapterData(ChapterHandler.STATIC_INSTANCE.getChapterData());
+                playerData.getProgressData().setChapterData(ChapterHandler.STATIC_INSTANCE.getChapterDataList().get(0));
                 if (playerDataHandler.putPlayerData(player.getUniqueId(), playerData)) {
                     printDebug("已创建并存储 PlayerData for " + player.getName(), false);
                 } else {

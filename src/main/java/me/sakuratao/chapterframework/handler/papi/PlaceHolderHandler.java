@@ -2,6 +2,7 @@ package me.sakuratao.chapterframework.handler.papi;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.sakuratao.chapterframework.ChapterFramework;
+import me.sakuratao.chapterframework.handler.ChapterHandler;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,6 +36,7 @@ public class PlaceHolderHandler extends PlaceholderExpansion {
         return switch (params) {
             case "version" -> chapterFramework.getDescription().getVersion();
             case "name" -> chapterFramework.getDescription().getName();
+            case "chapterNumber" -> ChapterHandler.STATIC_INSTANCE.getChapterDataList().size() + "";
             default -> "null";
         };
 

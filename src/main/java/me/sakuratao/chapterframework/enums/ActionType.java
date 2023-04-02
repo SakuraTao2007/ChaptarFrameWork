@@ -7,6 +7,7 @@ public enum ActionType {
     CHAT_FRAME("ChatFrame"), /* 在 聊天框 现实文本*/
     DELAY("Delay"), /* 设置 Delay */
     TASK("Task"), /* 用于转跳任务 */
+    CP("CP"), /* 用于转跳章节 */
     CONDITIONS("Conditions"), /* 调价判断 */
     ;
 

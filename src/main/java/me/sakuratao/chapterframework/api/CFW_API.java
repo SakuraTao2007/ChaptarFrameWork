@@ -9,6 +9,8 @@ public interface CFW_API {
 
     PlayerData playerData(Player player);
 
+    void start(Player player);
+
     default DataAccessor getAccessor() {
         return DataAccessorHandler.STATIC_INSTANCE.getDataAccessor();
     }

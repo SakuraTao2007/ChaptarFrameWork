@@ -29,7 +29,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
     ChapterFramework chapterFrameWork;
     @Wire
     PlayerDataHandler playerDataHandler;
-    @Getter ChapterData chapterData;
+    @Getter List<ChapterData> chapterDataList = new ArrayList<>();
 
     public static ChapterHandler STATIC_INSTANCE;
 
@@ -52,6 +52,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 YamlConfiguration chapter = YamlConfiguration.loadConfiguration(file);
 
                 ChapterData chapterData = new ChapterData();
+                chapterData.setId(chapter.getInt("chapter_id"));
                 chapterData.setChapterName(chapter.getString("chapter_name"));
                 chapterData.setChapterVersion(chapter.getString("version"));
 
@@ -94,10 +95,11 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                     }
                 }
 
-                this.chapterData = chapterData;
+                chapterDataList.add(chapterData);
                 chapterFrameWork.getLogger().info(" | Loaded Chapter " + chapterData.getChapterName() + ".");
 
             }
+            chapterDataList = chapterDataList.stream().sorted(Comparator.comparing(ChapterData::getId)).toList();
         }
         
     }
@@ -165,6 +167,20 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                         playerData.getProgressData().setTaskData(t);
                 });
                 return;
+            }
+            if (segmentation.get(0).equalsIgnoreCase(ActionType.CP.getType())) {
+                if (segmentation.get(1) != null) {
+
+                    for (char c : segmentation.get(1).toCharArray()){
+                        if (!Character.isDigit(segmentation.get(1).charAt(c))){
+                            printDebug("在章节 " + playerData.getProgressData().getChapterData().getChapterName() + " 中存在 CP 转跳问题", true);
+                            return;
+                        }
+                    }
+
+                    playerData.getProgressData().setChapterData(ChapterHandler.STATIC_INSTANCE.chapterDataList.get(Integer.parseInt(segmentation.get(1))));
+
+                }
             }
             if (segmentation.get(0).equalsIgnoreCase(ActionType.CHAT_FRAME.getType())) {
                 player.sendMessage(segmentation.get(1));

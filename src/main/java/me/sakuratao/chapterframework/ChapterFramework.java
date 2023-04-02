@@ -4,17 +4,21 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import lombok.Getter;
 import lombok.Setter;
+import me.sakuratao.chapterframework.api.CFW_API;
 import me.sakuratao.chapterframework.api.CFW_APIProvider;
 import me.sakuratao.chapterframework.data.cache.CacheData;
+import me.sakuratao.chapterframework.data.player.PlayerData;
 import me.sakuratao.chapterframework.handler.ChapterHandler;
 import me.sakuratao.chapterframework.handler.ConfigHandler;
 import me.sakuratao.chapterframework.handler.storage.DataAccessorHandler;
 import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.tasks.DataSaveLoopTask;
+import me.sakuratao.chapterframework.tasks.RegularLoopExecutionTask;
 import me.sakuratao.chapterframework.utils.NMSUtil;
 import me.sakuratao.chapterframework.utils.helper.SchedulerHelper;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
 import top.jingwenmc.spigotpie.common.instance.Wire;
@@ -90,12 +94,25 @@ public final class ChapterFramework extends JavaPlugin implements SchedulerHelpe
             protocolManager = ProtocolLibrary.getProtocolManager();
             getLogger().info(" | + Citizens Hooked.                                        ");
         }
-        CFW_APIProvider.setCFW_API(player -> playerDataHandler.getPlayerData(player));
+        CFW_APIProvider.setCFW_API(new CFW_API() {
+            @Override
+            public PlayerData playerData(Player player) {
+                return playerDataHandler.getPlayerData(player);
+            }
+
+            @Override
+            public void start(Player player) {
+                if (playerDataHandler.getPlayerData(player) != null){
+                    getCacheData().getBukkitTaskMap().put(player, taskTimerAsync(player, new RegularLoopExecutionTask(player, playerDataHandler.getPlayerData(player)),  0, ConfigHandler.LOOP_INTERVAL));
+                }
+            }
+        });
         getLogger().info(" | API Setup.                                                   ");
     }
 
     @Override
     public void onDisable() {
+        playerDataHandler.mapObject.values().forEach(o -> DataAccessorHandler.STATIC_INSTANCE.getDataAccessor().savePlayerDataAsync(o));
     }
 
     public ProtocolManager protocolManager() {

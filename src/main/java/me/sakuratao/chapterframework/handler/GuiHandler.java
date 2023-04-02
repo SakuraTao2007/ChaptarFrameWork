@@ -7,13 +7,26 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import top.jingwenmc.spigotpie.common.configuration.Configuration;
+import top.jingwenmc.spigotpie.common.configuration.ConfigurationFile;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @PieComponent
+@ConfigurationFile("gui.yml")
 public class GuiHandler {
+
+    @Configuration(value = "GUI.STARTGUI.TITLE")
+    public static String STARTGUI_TITLE = "&a开始行动";
+    @Configuration(value = "GUI.STARTGUI.ROWS")
+    public static int STARTGUI_ROWS = 3;
+    @Configuration(value = "GUI.STARTGUI.ITEMS")
+    public static List<String> STARTGUI_ITEMS = Arrays.asList(
+            "1:STONE:1:石头:这是一个示例<l>这是一个示例<l>:CONFIRM",
+            "ROWS:MATERIAL:AMOUNT:NAME:Lore<l>Lore<l>:"
+    );
 
     /**
      *

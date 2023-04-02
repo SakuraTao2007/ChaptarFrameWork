@@ -18,14 +18,7 @@ public class ConfigHandler extends BaseConfiguration {
     @Configuration(value = "AUTO_SAVE_TIME")
     public static int AUTO_SAVE_TIME = 30;
 
-    @Configuration(value = "GUI.STARTGUI.TITLE")
-    public static String STARTGUI_TITLE = "&a开始行动";
-    @Configuration(value = "GUI.STARTGUI.ROWS")
-    public static int STARTGUI_ROWS = 3;
-    @Configuration(value = "GUI.STARTGUI.ITEMS")
-    public static List<String> STARTGUI_ITEMS = Arrays.asList(
-            "1:STONE:1:这是一个示例<l>这是一个示例<l>:CONFIRM",
-            "ROWS:MATERIAL:AMOUNT:Lore<l>Lore<l>:"
-            );
+    @Configuration(value = "LOOP_INTERVAL")
+    public static int LOOP_INTERVAL = 5;
 
 }

@@ -21,7 +21,10 @@ public class RegularLoopExecutionTask implements Runnable, MessageHelper {
     @Override
     public void run() {
 
-        if (playerData.getDelayTime() > System.currentTimeMillis() || playerData.getConditionData() != null) {
+        if (
+                playerData.getDelayTime() > System.currentTimeMillis() ||
+                playerData.getConditionData() != null
+        ) {
             return;
         }
         if (taskSetting < playerData.getProgressData().getTaskData().getSetting().size()) {
