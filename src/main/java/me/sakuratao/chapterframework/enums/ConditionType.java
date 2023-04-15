@@ -4,6 +4,7 @@ public enum ConditionType {
 
     MOVE("Move"),
     INTERACT("Interact"),
+    NPC("NPC"),
     ;
 
     private final String condition;

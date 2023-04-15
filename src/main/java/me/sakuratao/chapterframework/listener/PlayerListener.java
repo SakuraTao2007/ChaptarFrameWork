@@ -9,9 +9,13 @@ import me.sakuratao.chapterframework.handler.storage.DataAccessorHandler;
 import me.sakuratao.chapterframework.handler.PlayerDataHandler;
 import me.sakuratao.chapterframework.utils.helper.MessageHelper;
 import me.sakuratao.chapterframework.utils.helper.SchedulerHelper;
+import net.citizensnpcs.api.event.NPCDamageByEntityEvent;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -80,14 +84,21 @@ public class PlayerListener implements Listener, MessageHelper, SchedulerHelper 
         Player player = event.getPlayer();
         PlayerData playerData = playerDataHandler.getPlayerData(player); // TODO: 2023/2/24  
         if (playerData.getConditionData() == null || playerData.getConditionData().getType() != ConditionType.MOVE) return;
+
         printDebug("", false);
     }
 
     @EventHandler
-    public void onConditionWithInteract(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
-        PlayerData playerData = playerDataHandler.getPlayerData(player); // TODO: 2023/2/24  
-        if (playerData.getConditionData() == null || playerData.getConditionData().getType() != ConditionType.INTERACT) return;
+    public void onConditionWithInteractNPC(NPCDamageByEntityEvent event) {
+        Player player = (Player) event.getDamager();
+        PlayerData playerData = playerDataHandler.getPlayerData(player);
+        NPC npc = event.getNPC();
+        if (
+                playerData.getConditionData() == null ||
+                playerData.getConditionData().getType() != ConditionType.NPC ||
+                npc.getId() != Integer.parseInt(playerData.getConditionData().getCondition())
+        ) return;
+        playerData.setConditionData(null);
         printDebug("", false);
     }
 

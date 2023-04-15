@@ -12,6 +12,9 @@ import java.util.List;
 @ConfigurationFile("config.yml")
 public class ConfigHandler extends BaseConfiguration {
 
+    @Configuration(value = "LANGUAGE")
+    public static String LANGUAGE = "zh_CN";
+
     @Configuration(value = "AUTO_SAVE_DATA")
     public static boolean AUTO_SAVE_DATA = true;
 

@@ -185,6 +185,26 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
             if (segmentation.get(0).equalsIgnoreCase(ActionType.CHAT_FRAME.getType())) {
                 player.sendMessage(segmentation.get(1));
             }
+            if (segmentation.get(0).equalsIgnoreCase(ActionType.PRINT_CF.getType())) {
+                long delay = System.currentTimeMillis() + 70;
+                for (int o = 0; o <= segmentation.get(1).length(); o++){
+                    while (System.currentTimeMillis() < delay) {
+                    }
+                    for (int i = 0; i <= 30; i++) player.sendMessage("");
+                    if (!chapterFrameWork.getCacheData().getPrintHistory().containsKey(player)) chapterFrameWork.getCacheData().getPrintHistory().put(player, new ArrayList<String>());
+                    chapterFrameWork.getCacheData().getPrintHistory().get(player).forEach(player::sendMessage);
+                    if (o % 2 == 0) {
+                        player.sendMessage(segmentation.get(1).substring(0, o) + "|");
+                    } else {
+                        player.sendMessage(segmentation.get(1).substring(0, o));
+                    }
+                    delay = System.currentTimeMillis() + 70;
+                }
+                chapterFrameWork.getCacheData().getPrintHistory().get(player).add(segmentation.get(1));
+            }
+            if (segmentation.get(0).equalsIgnoreCase(ActionType.CLEAN_PCF.getType())){
+                if (chapterFrameWork.getCacheData().getPrintHistory().containsKey(player)) chapterFrameWork.getCacheData().getPrintHistory().put(player, new ArrayList<String>());
+            }
         });
 
     }

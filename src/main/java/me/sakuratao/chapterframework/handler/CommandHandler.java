@@ -1,11 +1,13 @@
 package me.sakuratao.chapterframework.handler;
 
 import me.sakuratao.chapterframework.ChapterFramework;
+import me.sakuratao.chapterframework.api.CFW_APIProvider;
 import me.sakuratao.chapterframework.enums.PermissionType;
 import me.sakuratao.chapterframework.utils.CCUtil;
 import me.sakuratao.chapterframework.utils.helper.MessageHelper;
 import me.sakuratao.chapterframework.utils.helper.SchedulerHelper;
 import org.bukkit.Bukkit;
+import top.jingwenmc.spigotpie.common.command.CommandItem;
 import top.jingwenmc.spigotpie.common.command.CommandSender;
 import top.jingwenmc.spigotpie.common.command.PieCommand;
 import top.jingwenmc.spigotpie.common.instance.PieComponent;
@@ -42,6 +44,11 @@ public class CommandHandler implements SchedulerHelper, MessageHelper {
             chapterFrameWork.getLogger().info(translateColor("| Debug ~ 已开启 Debug 模式, Debug 内容将斜体并附加下划线显示 <开启者: " + sender.getName() + ">"));
             chapterFrameWork.setDebugged(true);
         }
+    }
+
+    @PieCommand(value = "cfw start", permission = "cfw.command", bungeeCord = false, spigot = true)
+    public void startCommand(CommandItem commandItem){
+        CFW_APIProvider.getCFW_API().start(Bukkit.getPlayer(commandItem.getArgs()[0]));
     }
 
 }

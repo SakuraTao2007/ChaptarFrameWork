@@ -1,5 +1,6 @@
 package me.sakuratao.chapterframework.tasks;
 
+import me.sakuratao.chapterframework.ChapterFramework;
 import me.sakuratao.chapterframework.data.player.PlayerData;
 import me.sakuratao.chapterframework.enums.DelayType;
 import me.sakuratao.chapterframework.handler.ChapterHandler;
@@ -28,7 +29,8 @@ public class RegularLoopExecutionTask implements Runnable, MessageHelper {
             return;
         }
         if (taskSetting < playerData.getProgressData().getTaskData().getSetting().size()) {
-            ChapterHandler.STATIC_INSTANCE.decodeAndExecute(player, playerData.getProgressData().getChapterData(), playerData.getProgressData().getTaskData().getSetting().get(taskSetting));
+            String setting = playerData.getProgressData().getTaskData().getSetting().get(taskSetting);
+            ChapterHandler.STATIC_INSTANCE.decodeAndExecute(player, playerData.getProgressData().getChapterData(), setting);
             printDebug(taskSetting + " | " + player.getName() + " | " + playerData.getProgressData().getTaskData().getSetting().get(taskSetting),false);
             taskSetting++;
         }
