@@ -24,4 +24,10 @@ public class ConfigHandler extends BaseConfiguration {
     @Configuration(value = "LOOP_INTERVAL")
     public static int LOOP_INTERVAL = 5;
 
+    @Configuration(value = "PRINT_CF_DELAY")
+    public static double PRINT_CF_DELAY = 0.07;
+
+    @Configuration(value = "PRINT_AB_DELAY")
+    public static double PRINT_AB_DELAY = 0.07;
+
 }

@@ -163,8 +163,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 }
                 String taskId = segmentation.get(1);
                 playerData.getProgressData().getSectionData().getTasks().forEach(t -> {
-                    if (Integer.getInteger(taskId).equals(t.getId()))
-                        playerData.getProgressData().setTaskData(t);
+                    if (Integer.getInteger(taskId) == t.getId()) playerData.getProgressData().setTaskData(t);
                 });
                 return;
             }
@@ -186,7 +185,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 player.sendMessage(segmentation.get(1));
             }
             if (segmentation.get(0).equalsIgnoreCase(ActionType.PRINT_CF.getType())) {
-                long delay = System.currentTimeMillis() + 70;
+                long delay = System.currentTimeMillis() + (long)(ConfigHandler.PRINT_CF_DELAY * 1000);
                 for (int o = 0; o <= segmentation.get(1).length(); o++){
                     while (System.currentTimeMillis() < delay) {
                     }
@@ -198,7 +197,7 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                     } else {
                         player.sendMessage(segmentation.get(1).substring(0, o));
                     }
-                    delay = System.currentTimeMillis() + 70;
+                    delay = System.currentTimeMillis() + (long)(ConfigHandler.PRINT_CF_DELAY * 1000);
                 }
                 chapterFrameWork.getCacheData().getPrintChatFrame().get(player).add(segmentation.get(1));
             }
@@ -206,16 +205,16 @@ public class ChapterHandler implements MessageHelper, SchedulerHelper {
                 if (chapterFrameWork.getCacheData().getPrintChatFrame().containsKey(player)) chapterFrameWork.getCacheData().getPrintChatFrame().put(player, new ArrayList<String>());
             }
             if (segmentation.get(0).equalsIgnoreCase(ActionType.PRINT_AB.getType())) {
-                long delay = System.currentTimeMillis() + 70;
+                long delay = System.currentTimeMillis() + (long)(ConfigHandler.PRINT_AB_DELAY * 1000);
                 for (int o = 0; o <= segmentation.get(1).length(); o++){
                     while (System.currentTimeMillis() < delay) {
                     }
                     if (o % 2 == 0) {
                         audience.sendActionBar(Component.text(translateColor(segmentation.get(1).substring(0, o) + "|")));
                     } else {
-                        audience.sendActionBar(Component.text(translateColor(segmentation.get(1).substring(0, o))));
+                        audience.sendActionBar(Component.text(segmentation.get(1).substring(0, o)));
                     }
-                    delay = System.currentTimeMillis() + 70;
+                    delay = System.currentTimeMillis() + (long)(ConfigHandler.PRINT_AB_DELAY * 1000);
                 }
             }
         });
