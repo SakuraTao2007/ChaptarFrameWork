@@ -19,7 +19,7 @@ public class CacheData {
 
     final ConcurrentMap<Player, BukkitTask> bukkitTaskMap = new ConcurrentHashMap<>(); /* for regularLoopExecution */
 
-    Map<Player, List<String>> printHistory = new HashMap<>();
+    Map<Player, List<String>> printChatFrame = new HashMap<>();
 
     boolean PAPI = false;
     boolean PROTOCOL_LIB = false;

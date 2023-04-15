@@ -7,6 +7,7 @@ public enum ActionType {
     CHAT_FRAME("ChatFrame"), /* 在 聊天框 现实文本*/
     PRINT_CF("PrintCF"), /* 在 聊天框 实现 打印输出 文本 */
     CLEAN_PCF("CleanPCF"), /* 用于清理 PrintCF 的语句缓存 */
+    PRINT_AB("PrintAB"), /* 在 ActionBar 实现 打印输出 文本 */
     DELAY("Delay"), /* 设置 Delay */
     TASK("Task"), /* 用于转跳任务 */
     CP("CP"), /* 用于转跳章节 */
